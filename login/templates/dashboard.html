@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title> This is dashboard</title>
+
+</head>
+ 
+<body>
+    {% include 'navigation.html' %}
+    <h1>Dashboard</h1>
+    <h3>welcome {{user.username}}</h3>
+    <p>Login successfully</p>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

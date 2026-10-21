@@ -1,0 +1,140 @@
+
+{% load static %}
+
+<nav class="pro-navbar">
+    
+   <div> <span class="brand-icon">🛒 ProShop</span></div></br>
+    
+    <div class="nav-search">
+        <input type="search" placeholder="Search for products...">
+        <button type="button" aria-label="Search">⌕</button>
+    </div>
+
+    <ul class="nav-links">
+        <li>Home</a></li>
+        <li>Shop</a></li>
+        <li>Categories</a></li>
+        <li>Deals</a></li>
+        <li>AI Suggestions</a></li>
+    </ul>
+
+    <div class="nav-actions">
+       <li>♡</li>
+       <li>🛍</li>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">
+                Hi, {{ user.username }}
+            </a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}" class="register-btn">
+                Register
+            </a>
+        {% endif %}
+    </div>
+</nav>
+
+<style>
+    .pro-navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+        flex-wrap: wrap;
+        padding: 18px 4%;
+        background: #102b49;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 3px 12px #0002;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        font-size: 25px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .brand-icon {
+        margin-right: 8px;
+    }
+
+   
+    .nav-search {
+        display: flex;
+        flex: 1;
+        max-width: 260px;
+        min-width: 160px;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .nav-search input {
+        width: 100%;
+        min-width: 0;
+        padding: 10px 14px;
+        border: none;
+        outline: none;
+    }
+
+    .nav-search button {
+        padding: 0 14px;
+        background: #1677ff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .nav-links, .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links a, .nav-actions a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .nav-links a:hover, .nav-actions a:hover {
+        color: #38bdf8;
+    }
+
+    .nav-actions .register-btn {
+        background: #1677ff;
+        padding: 10px 14px;
+        border-radius: 7px;
+    }
+
+    @media (max-width: 950px) {
+        .pro-navbar {
+            justify-content: center;
+        }
+
+        .nav-links, .nav-actions {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 550px) {
+        .nav-search {
+            max-width: 100%;
+            flex-basis: 100%;
+        }
+
+        .nav-links {
+            gap: 12px;
+        }
+    }
+</style>
