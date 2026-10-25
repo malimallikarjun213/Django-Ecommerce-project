@@ -1,0 +1,209 @@
+
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/Myprofile.css' %}">
+<head>
+    <!-- Main content -->
+     
+    <main class="main-content">
+
+        <header class="page-header">
+            <div>
+                <h1>My Profile</h1>
+                <p>Manage your personal information and account.</p>
+            </div>
+            <button class="primary-btn" id="editBtn">✏️ Edit Profile</button>
+            
+            <a href="{% url 'HomePage' %}"> <button class="primary-btn"> back</button></a>
+        </header>
+
+        <!-- Profile card -->
+        <section class="profile-card">
+            <div class="cover"></div>
+
+            <div class="profile-info">
+                <div class="photo-wrapper">
+                    <img
+                        id="profilePhoto"
+                        src="images/arjun.jpeg"
+                        alt="Profile photo"
+                    >
+                    <label for="photoInput" class="camera-btn"
+                           title="Change profile photo">📷</label>
+                    <input type="file" id="photoInput" accept="image/*" hidden>
+                </div>
+
+                <div class="profile-text">
+                    <h2 id="displayName" >mallikarjun</h2>
+                    <p id="displayEmail">yourname@example.com</p>
+                    <span class="member-badge">ProShop Member</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal information -->
+        <section class="details-card">
+            <div class="section-header">
+                <h2>👤 Personal Information</h2>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail">
+                    <span>Full Name</span>
+                    <strong id="nameValue">Your Name</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Username</span>
+                    <strong id="usernameValue">yourname123</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Email Address</span>
+                    <strong id="emailValue">yourname@example.com</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Mobile Number</span>
+                    <strong id="phoneValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Date of Birth</span>
+                    <strong id="dobValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Gender</span>
+                    <strong id="genderValue">Not specified</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Address information -->
+        <section class="details-card">
+            <div class="section-header">
+                <h2>📍 Address Information</h2>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail full-width">
+                    <span>Street Address</span>
+                    <strong id="addressValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>City</span>
+                    <strong id="cityValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>State</span>
+                    <strong id="stateValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>PIN Code</span>
+                    <strong id="pinValue">Not added yet</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Country</span>
+                    <strong id="countryValue">India</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account information -->
+        <section class="details-card">
+            <div class="section-header">
+                <h2>🔐 Account Information</h2>
+            </div>
+
+            <div class="account-row">
+                <div>
+                    <strong>Account Username</strong>
+                    <p>Your unique ProShop username</p>
+                </div>
+                <span id="accountUsername">yourname123</span>
+            </div>
+
+            <div class="account-row">
+                <div>
+                    <strong>Password</strong>
+                    <p>Keep your account secure</p>
+                </div>
+                <button class="text-btn" id="passwordBtn">
+                    Change Password
+                </button>
+            </div>
+        </section>
+
+        <footer>© 2026 ProShop. All rights reserved.</footer>
+    </main>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edit Profile</h2>
+            <button type="button" class="close-btn" id="closeBtn"
+                    aria-label="Close">&times;</button>
+        </div>
+
+        <form id="profileForm">
+            <label for="nameInput">Full Name</label>
+            <input type="text" id="nameInput" required>
+
+            <label for="usernameInput">Username</label>
+            <input type="text" id="usernameInput" required>
+
+            <label for="emailInput">Email Address</label>
+            <input type="email" id="emailInput" required>
+
+            <label for="phoneInput">Mobile Number</label>
+            <input type="tel" id="phoneInput" placeholder="Enter phone number">
+
+            <label for="dobInput">Date of Birth</label>
+            <input type="date" id="dobInput">
+
+            <label for="genderInput">Gender</label>
+            <select id="genderInput">
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+            </select>
+
+            <label for="addressInput">Street Address</label>
+            <textarea id="addressInput" rows="3"
+                      placeholder="Enter your address"></textarea>
+
+            <label for="cityInput">City</label>
+            <input type="text" id="cityInput">
+
+            <label for="stateInput">State</label>
+            <input type="text" id="stateInput">
+
+            <label for="pinInput">PIN Code</label>
+            <input type="text" id="pinInput" inputmode="numeric"
+                   maxlength="6">
+
+            <label for="countryInput">Country</label>
+            <input type="text" id="countryInput" value="India">
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" id="cancelBtn">
+                    Cancel
+                </button>
+                <button type="submit" class="primary-btn">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+<script src="{% static 'script/Myprofile.js' %}" defer></script>

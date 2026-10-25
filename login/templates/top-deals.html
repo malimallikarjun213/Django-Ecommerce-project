@@ -1,0 +1,113 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/top-deals.css' %}">
+</head>
+<section class="tech-deals-section">
+
+    <div class="tech-deals-heading">
+        <h2>✨ Top deals on tech</h2>
+    </div>
+
+    <div class="tech-carousel">
+
+        <button class="tech-arrow tech-prev"
+                id="techPrev"
+                aria-label="Previous products">
+            &#10094;
+        </button>
+
+        <div class="tech-viewport" id="techViewport">
+
+            <div class="tech-track" id="techTrack">
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=600&q=80"
+                    alt="Smartphone">
+                            <div class="tech-price">From ₹25,999*</div>
+                        </div>
+                        <p>Smartphones</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=500&q=80"
+                                 alt="Refrigerator">
+                            <div class="tech-price">From ₹17,990*</div>
+                        </div>
+                        <p>Frost Free</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80"
+                                 alt="Computer monitor">
+                            <div class="tech-price">From ₹5,349*</div>
+                        </div>
+                        <p>Acer Monitors</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=500&q=80"
+                                 alt="Mobile phone">
+                            <div class="tech-price">From ₹29,749*</div>
+                        </div>
+                        <p>Edge 70 Fusion</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=500&q=80"
+                                 alt="Washing machine">
+                            <div class="tech-price">From ₹6,299*</div>
+                        </div>
+                        <p>Washing Machines</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+                                 alt="Personal electronics">
+                            <div class="tech-price">From ₹549*</div>
+                        </div>
+                        <p>Audio Deals</p>
+                    </a>
+                </article>
+
+                <article class="tech-card">
+                    <a href="#" class="tech-product-link">
+                        <div class="tech-image">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80"
+                                 alt="Vivo style smartphone">
+                            <div class="tech-price">From ₹15,999*</div>
+                        </div>
+                        <p>Latest Phones</p>
+                    </a>
+                </article>
+
+            </div>
+        </div>
+
+        <button class="tech-arrow tech-next"
+                id="techNext"
+                aria-label="Next products">
+            &#10095;
+        </button>
+
+    </div>
+</section>
+
+
+<script src="{% static 'script/top-deals.js' %}" defer></script>

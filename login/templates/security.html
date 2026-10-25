@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Change Password | ProShop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #e8edff, #f4f6fb, #e2e8f7);
+        }
+
+        .center {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .login-card {
+            width: 100%;
+            overflow: hidden;
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(7, 30, 101, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .login-header {
+            padding: 32px 20px 35px;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, #071e65, #173b9a);
+            border-radius: 0 0 35px 35px;
+        }
+
+        .shield {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .shield h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 75px;
+            height: 75px;
+            margin-bottom: 16px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 38px;
+        }
+
+        .shield p {
+            margin-bottom: 8px;
+            color: #dbeafe;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .shield b {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        form {
+            width: 100%;
+            padding: 30px;
+            background: #ffffff;
+        }
+
+        .form-description {
+            margin-bottom: 25px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 19px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 9px;
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-box {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1.5px solid #d7dfed;
+            border-radius: 11px;
+            outline: none;
+            background: #f9fbff;
+            color: #172033;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .input-box::placeholder {
+            color: #94a3b8;
+        }
+
+        .input-box:focus {
+            border-color: #2563eb;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        .error-message {
+            display: block;
+            margin: 12px 0;
+            padding: 12px 14px;
+            border: 1px solid #fecaca;
+            border-radius: 9px;
+            background: #fef2f2;
+            color: #dc2626;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .success-message p1 {
+            display: block;
+            margin: 12px 0;
+            color: #15803d;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .change-password-btn {
+            width: 100%;
+            min-height: 50px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #071e65, #2563eb);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .change-password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.28);
+        }
+
+        .change-password-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            margin-top: 23px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #1d4ed8;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .bottom-note {
+            margin-top: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+        .back-link {
+         display: inline-block;
+          margin-bottom: 25px;
+          color: #173b9a;
+         text-decoration: none;
+         font-weight: 600;
+          }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .login-header {
+                padding: 27px 15px 30px;
+            }
+
+            .shield b {
+                font-size: 24px;
+            }
+
+            form {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="center">
+    <a href="{% url 'setting' %}" class="back-link">← Back to Home</a>
+    <div class="login-card">
+
+        <div class="login-header">
+            <div class="shield">
+                <h2>🛡️</h2>
+                <p>Admin Login</p>
+                <b>Change Password</b>
+            </div>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <p class="form-description">
+                Create a new password for your account.
+                Enter your username and confirm your new password below.
+            </p>
+
+            {% if success %}
+                <script>
+                    alert("{{ success }}");
+                </script>
+            {% endif %}
+
+            {% if error1 %}
+                <p class="error-message">{{ error1 }}</p>
+            {% endif %}
+            
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="input-box"
+                    placeholder="Enter username"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="new_password">New Password</label>
+                <input
+                    type="password"
+                    id="new_password"
+                    name="new_password"
+                    class="input-box"
+                    placeholder="Enter new password"
+                >
+            </div>
+
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    class="input-box"
+                    placeholder="Confirm password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="change-password-btn">
+                🔒 Change Password
+            </button>
+         <!--
+            <p class="login-link">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>-->
+
+            <div class="bottom-note">
+                🛡️ Keep your account safe with a strong password.
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        document.querySelectorAll(".error-message").forEach(function (message) {
+            message.style.display = "none";
+        });
+    }, 3000);
+</script>
+
+</body>
+</html>
