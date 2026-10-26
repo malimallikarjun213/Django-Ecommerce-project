@@ -1,0 +1,90 @@
+
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Settings | ProShop</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f5fb;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .language-card {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #0002;
+        }
+
+        h2 {
+            color: #0b1744;
+        }
+
+        p {
+            color: #666;
+        }
+
+        label {
+            display: block;
+            margin: 20px 0 8px;
+        }
+
+        select, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        select {
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        button {
+            margin-top: 20px;
+            border: none;
+            background: #0b1744;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #243b80;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{% url 'HomePage' %}"><button>Back</button></a>
+    <div class="language-card">
+        <h2>🌐 Language Settings</h2>
+        <p>Choose your preferred language for ProShop.</p>
+
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+            <label for="language">Select Language</label>
+
+            <select name="language" id="language">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="mr">मराठी (Marathi)</option>
+            </select>
+
+            <button type="submit">Save Language</button>
+        </form>
+    </div>
+</body>
+</html>

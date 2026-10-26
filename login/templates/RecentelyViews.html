@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProShop Recently Viewed</title>
+
+    <link rel="stylesheet" href="{% static 'css/RecentelyView.css' %}">
+</head>
+<body>
+
+<section class="recent-section">
+
+    <div class="recent-heading">
+        <div>
+            <h2>Recently Viewed</h2>
+            <p>Pick up where you left off</p>
+        </div>
+
+        <div class="slider-buttons">
+            <button class="slide-btn prev-btn"
+                    type="button"
+                    aria-label="Previous products">
+                &#10094;
+            </button>
+
+            <button class="slide-btn next-btn"
+                    type="button"
+                    aria-label="Next products">
+                &#10095;
+            </button>
+        </div>
+    </div>
+
+    <div class="recent-slider">
+        <div class="recent-track">
+
+            <!-- Product 1 -->
+            <article class="recent-card">
+                <span class="recent-discount">-20%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=600&q=80"
+                    alt="Smartphone">
+
+                <div class="recent-info">
+                    <h3>Smartphone</h3>
+                    <p class="recent-rating">⭐ 4.8 (1.2k)</p>
+                    <p class="recent-price">
+                        ₹49,999 <del>₹59,999</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 2 -->
+            <article class="recent-card">
+                <span class="recent-discount">-15%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+                    alt="Wireless headphones">
+
+                <div class="recent-info">
+                    <h3>Wireless Headphones</h3>
+                    <p class="recent-rating">⭐ 4.7 (856)</p>
+                    <p class="recent-price">
+                        ₹2,999 <del>₹3,499</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 3 -->
+            <article class="recent-card">
+                <span class="recent-discount">-25%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80"
+                    alt="Laptop">
+
+                <div class="recent-info">
+                    <h3>Laptop</h3>
+                    <p class="recent-rating">⭐ 4.9 (2.1k)</p>
+                    <p class="recent-price">
+                        ₹64,999 <del>₹85,999</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 4 -->
+            <article class="recent-card">
+                <span class="recent-discount">-30%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+                    alt="Sports shoes">
+
+                <div class="recent-info">
+                    <h3>Sports Shoes</h3>
+                    <p class="recent-rating">⭐ 4.6 (1.4k)</p>
+                    <p class="recent-price">
+                        ₹2,499 <del>₹3,599</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 5 -->
+            <article class="recent-card">
+                <span class="recent-discount">-18%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+                    alt="Smart watch">
+
+                <div class="recent-info">
+                    <h3>Smart Watch</h3>
+                    <p class="recent-rating">⭐ 4.7 (932)</p>
+                    <p class="recent-price">
+                        ₹3,999 <del>₹4,899</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 6 -->
+            <article class="recent-card">
+                <span class="recent-discount">-12%</span>
+                <img
+                    src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80"
+                    alt="Premium watch">
+
+                <div class="recent-info">
+                    <h3>Premium Watch</h3>
+                    <p class="recent-rating">⭐ 4.5 (540)</p>
+                    <p class="recent-price">
+                        ₹5,499 <del>₹6,299</del>
+                    </p>
+                    <button class="recent-cart" type="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+</section>
+<script src="{% static 'script/RecentelyView.js' %}"></script>
+</body>
+</html>

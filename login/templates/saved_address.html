@@ -1,0 +1,86 @@
+
+{% extends "profile-base.html" %}
+{% load static %}
+
+{% block title %}Saved Addresses | ProShop{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/saved_address.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="address-page">
+
+    <div class="page-header">
+        <div>
+            <h1>Saved Addresses</h1>
+            <p>Manage your delivery addresses.</p>
+        </div>
+
+        <button type="button" id="addAddressBtn">
+            + Add New Address
+        </button>
+    </div>
+
+    <div id="addressList" class="address-list">
+        <!-- Addresses will appear here -->
+    </div>
+
+    <!-- Add/Edit Address Form -->
+    <div id="addressFormBox" class="form-box" hidden>
+
+        <h2 id="formTitle">Add New Address</h2>
+
+        <form id="addressForm">
+
+            <input type="hidden" id="addressId">
+
+            <label>Full Name</label>
+            <input type="text" id="fullName" required>
+
+            <label>Phone Number</label>
+            <input type="tel" id="phone" maxlength="10"
+                   pattern="[0-9]{10}" required>
+
+            <label>Full Address</label>
+            <textarea id="fullAddress" required></textarea>
+
+            <label>City</label>
+            <input type="text" id="city" required>
+
+            <label>State</label>
+            <input type="text" id="state" required>
+
+            <label>PIN Code</label>
+            <input type="text" id="pincode" maxlength="6"
+                   pattern="[0-9]{6}" required>
+
+            <label>Address Type</label>
+            <select id="addressType">
+                <option value="Home">Home</option>
+                <option value="Work">Work</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <div class="form-buttons">
+                <button type="submit" id="saveBtn">
+                    Save Address
+                </button>
+
+                <button type="button" id="cancelBtn">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'script/saved_address.js' %}" defer></script>
+{% endblock %}

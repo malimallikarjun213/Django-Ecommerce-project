@@ -1,0 +1,530 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #172033;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button, a, label {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    position:fixed;
+    height: 800px;
+    width: 245px;
+    flex-shrink: 0;
+    background: #071442;
+    color: white;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 25px;
+    margin-bottom: 38px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.nav-link {
+    color: #f1ecf1;
+    padding: 14px;
+    border-radius: 9px;
+    transition: 0.25s;
+}
+
+.nav-link:hover{
+   
+    color: rgb(58, 8, 184);
+}
+.nav-link.active {background:#1646b8;}
+
+/* Sidebar navigation */
+.sidebar nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+/* Sidebar links */
+.sidebar .nav-link {
+    position: relative;
+    z-index: 1;
+    display: block;
+    color: #f1ecf1;
+    padding: 14px;
+    border-radius: 9px;
+    transition: color 0.25s ease;
+}
+
+.sidebar .nav-link:hover {
+    color: #ffffff;
+}
+
+/* Active link text */
+.sidebar .nav-link.active {
+    background: transparent;
+    color: #ffffff;
+}
+
+/* Moving background */
+#navIndicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 9px;
+    background: #1646b8;
+    box-shadow: 0 3px 12px rgba(22, 70, 184, 0.35);
+    transition:
+        top 0.3s ease,
+        left 0.3s ease,
+        width 0.3s ease,
+        height 0.3s ease;
+}
+/* Remove the fixed active background so the indicator shows */
+.sidebar .nav-link.active {
+    background: transparent;
+    color: white;
+}
+
+
+.logout {
+    color: #f4efef;
+    padding: 14px;
+    margin-top: auto;
+}
+.logout:hover{color: #245de0;}
+
+/* Main area */
+.main-content {
+    margin-left: 0px;
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    margin-bottom: 9px;
+}
+
+.page-header p {
+    color: #77839a;
+    line-height: 1.5;
+}
+
+.primary-btn {
+    border: none;
+    background: #5c35db;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.primary-btn:hover {
+    background: #1646b8;
+}
+
+/* Profile card */
+.profile-card,
+.details-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(19, 42, 84, 0.06);
+}
+
+.cover {
+    height: 125px;
+    background: linear-gradient(120deg, #153eaa, #48b7ee);
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 28px 25px;
+}
+
+.photo-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    margin-top: -48px;
+}
+
+.profile-info img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border: 5px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e5edff;
+}
+
+.camera-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #245de0;
+    color: white;
+    border: 3px solid white;
+    display: grid;
+    place-items: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.profile-text {
+    padding-top: 17px;
+    min-width: 0;
+}
+
+.profile-text h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.profile-text p {
+    color: #77839a;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+.member-badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: #e5f0ff;
+    color: #245de0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Detail cards */
+.details-card {
+    padding: 26px;
+}
+
+.section-header {
+    border-bottom: 1px solid #edf0f5;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 19px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 30px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.detail span {
+    color: #8490a5;
+    font-size: 13px;
+}
+
+.detail strong {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Account information */
+.account-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.account-row:last-child {
+    border-bottom: none;
+}
+
+.account-row p {
+    color: #8490a5;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.account-row > span {
+    overflow-wrap: anywhere;
+}
+
+.text-btn {
+    border: none;
+    background: none;
+    color: #245de0;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    color: #8490a5;
+    font-size: 13px;
+    padding: 15px 0;
+}
+
+/* Edit modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    padding: 20px;
+    background: rgba(5, 15, 40, 0.65);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.modal-header h2 {
+    font-size: 23px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #77839a;
+}
+
+#profileForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+}
+
+#profileForm label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+#profileForm input,
+#profileForm select,
+#profileForm textarea {
+    width: 100%;
+    border: 1px solid #dce2ed;
+    border-radius: 8px;
+    padding: 12px;
+    outline: none;
+    background: white;
+}
+
+#profileForm input:focus,
+#profileForm select:focus,
+#profileForm textarea:focus {
+    border-color: #245de0;
+    box-shadow: 0 0 0 3px rgba(36, 93, 224, 0.1);
+}
+
+#profileForm textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.cancel-btn {
+    background: #edf0f5;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+    .sidebar {
+        width: 195px;
+        padding: 22px 12px;
+    }
+
+    .main-content {
+        padding: 25px 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .logo {
+        margin-bottom: 16px;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .nav-link {
+        flex-shrink: 0;
+        font-size: 13px;
+        padding: 11px;
+    }
+
+    .logout {
+        margin-top: 5px;
+        padding: 8px;
+    }
+
+    .main-content {
+        padding: 22px 14px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 0 20px 22px;
+    }
+
+    .photo-wrapper {
+        margin-top: -42px;
+    }
+
+    .profile-info img {
+        width: 105px;
+        height: 105px;
+    }
+
+    .profile-text {
+        padding-top: 5px;
+    }
+
+    .profile-text h2 {
+        font-size: 21px;
+    }
+
+    .details-card {
+        padding: 20px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .account-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}

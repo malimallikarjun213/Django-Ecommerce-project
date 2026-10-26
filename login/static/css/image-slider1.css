@@ -1,0 +1,230 @@
+
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+}
+
+/* Featured section */
+.featured-section {
+    width: 100%;
+    padding: clamp(18px, 3vw, 35px);
+    overflow: hidden;
+}
+
+/* Heading */
+.section-heading {
+    margin:0;
+}
+
+.section-heading h2 {
+    margin: 0 0 8px;
+    color: #071e52;
+    font-size: clamp(22px, 2.5vw, 32px);
+}
+
+.section-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: clamp(13px, 1.5vw, 17px);
+}
+
+/* Slider window */
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Moving row */
+.product-track {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    width: max-content;
+
+    animation: scrollProducts 32s linear infinite;
+}
+
+/* Pause when the user hovers over the slider */
+.slider-container:hover .product-track {
+    animation-play-state: initial;
+}
+
+/* Individual product card */
+.product-card {
+    position: relative;
+    flex: 0 0 clamp(190px, 22vw, 250px);
+    overflow: hidden;
+
+    background: white;
+    border: 1px solid #e3eaf5;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(15, 35, 75, 0.08);
+
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(15, 35, 75, 0.15);
+}
+
+/* Product photo */
+.product-card img {
+    display: block;
+    width: 100%;
+    height: clamp(150px, 18vw, 210px);
+    object-fit: cover;
+    background: #e8edf5;
+}
+
+/* Discount label */
+.discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+
+    padding: 6px 10px;
+    color: white;
+    background: #ef4444;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Product details */
+.product-info {
+    padding: 15px;
+}
+
+.product-info h3 {
+    margin: 0 0 10px;
+    color: #172554;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.4;
+}
+
+.rating {
+    margin: 0 0 10px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.price {
+    margin: 0 0 15px;
+    color: #0866e8;
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: bold;
+}
+
+.price del {
+    margin-left: 5px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+/* Add to Cart button */
+.product-info button {
+    width: 100%;
+    padding: 11px 8px;
+
+    color: white;
+    background: #1677ff;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.product-info button:hover {
+    background: #0d5fd3;
+}
+
+/* Move the track left by exactly half its width.
+   The duplicated cards make the loop appear continuous. */
+@keyframes scrollProducts {
+    from {
+        transform: translateX(10px);
+    }
+
+    to {
+        transform: translateX(calc(-50% - 10px));
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .featured-section {
+        padding: 20px 14px;
+    }
+
+    .product-track {
+        gap: 14px;
+        animation-duration: 26s;
+    }
+
+    .product-card {
+        flex-basis: 200px;
+    }
+
+    .product-card img {
+        height: 165px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .section-heading {
+        margin-bottom: 18px;
+    }
+
+    .product-track {
+        gap: 12px;
+        animation-duration: 22s;
+    }
+
+    .product-card {
+        flex-basis: 175px;
+        border-radius: 10px;
+    }
+
+    .product-card img {
+        height: 145px;
+    }
+
+    .product-info {
+        padding: 11px;
+    }
+
+    .product-info h3 {
+        font-size: 15px;
+    }
+
+    .product-info button {
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+}
+/* Respect the user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .product-track {
+        animation: none;
+    }
+
+    .product-card {
+        transition: none;
+    }
+}

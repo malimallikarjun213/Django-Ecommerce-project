@@ -1,0 +1,199 @@
+
+/* Main section */
+.tech-deals-section {
+    border-radius: 15px;
+    background:
+        radial-gradient(circle at 15% 5%, #fff8b0 0 3px, transparent 5px),
+        radial-gradient(circle at 80% 10%, #fff 0 4px, transparent 7px),
+        linear-gradient(135deg, #ff087b, #d90067 55%, #ad0055);
+
+    background-size: 38px 38px, 55px 55px, cover;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.tech-deals-heading h2 {
+    color: white;
+    font-size: clamp(19px, 2vw, 24px);
+    margin: 0 5px 14px;
+    font-weight: 700;
+}
+
+/* Slider wrapper */
+.tech-carousel {
+    position: relative;
+    width: 100%;
+}
+
+/* Scrollable viewport */
+.tech-viewport {
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+
+.tech-viewport::-webkit-scrollbar {
+    display: none;
+}
+
+/* Product track */
+.tech-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    padding: 2px 3px 6px;
+}
+
+/* Product card */
+.tech-card {
+    flex: 0 0 clamp(145px, 13.5vw, 180px);
+    min-width: 0;
+    text-align: center;
+}
+
+.tech-product-link {
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+/* Image and price area */
+.tech-image {
+    height: clamp(175px, 18vw, 220px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    border: 4px solid #ffd54a;
+    border-radius: 24px 24px 17px 17px;
+    background: #fff8df;
+    box-shadow: 0 0 0 2px #e5a300;
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.tech-image img {
+    display: block;
+    width: 100%;
+    flex: 1;
+    object-fit: contain;
+    background: #f7f7f7;
+}
+
+.tech-price {
+    flex-shrink: 0;
+    padding: 8px 3px;
+    background: linear-gradient(#ffe77a, #ffc928);
+    color: #292018;
+    font-size: clamp(12px, 1.2vw, 16px);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Product name */
+.tech-card p {
+    margin: 9px 0 2px;
+    color: white;
+    font-size: clamp(13px, 1.4vw, 18px);
+    line-height: 1.3;
+}
+
+/* Hover effect */
+.tech-card:hover .tech-image {
+    transform: translateY(-4px);
+    box-shadow: 0 0 12px #ffe58a;
+}
+
+/* Navigation arrows */
+.tech-arrow {
+    position: absolute;
+    top: 40%;
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #333;
+    box-shadow: 0 3px 12px #0003;
+
+    font-size: 23px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.tech-arrow:hover {
+    background: #ffe28a;
+    transform: scale(1.07);
+}
+
+.tech-prev {
+    left: -5px;
+}
+
+.tech-next {
+    right: -5px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .tech-deals-section {
+        width: calc(100% - 20px);
+        padding: 12px 8px;
+    }
+
+    .tech-card {
+        flex-basis: 155px;
+    }
+
+    .tech-image {
+        height: 185px;
+    }
+
+    .tech-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 19px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .tech-deals-section {
+        width: calc(100% - 16px);
+        margin: 14px auto;
+    }
+
+    .tech-track {
+        gap: 10px;
+    }
+
+    .tech-card {
+        flex-basis: 135px;
+    }
+
+    .tech-image {
+        height: 165px;
+        border-radius: 18px 18px 12px 12px;
+    }
+
+    .tech-price {
+        font-size: 12px;
+        padding: 7px 1px;
+    }
+
+    .tech-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}

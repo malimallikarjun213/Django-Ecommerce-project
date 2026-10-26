@@ -1,0 +1,162 @@
+.address-page {
+    padding: 25px;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px;
+}
+
+.page-header p {
+    color: #666;
+    margin: 0;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#addAddressBtn,
+#saveBtn {
+    background: #0755c9;
+    color: white;
+}
+
+#cancelBtn {
+    background: #ddd;
+    color: #222;
+}
+
+.address-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.address-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 8px #0000000d;
+    overflow-wrap: anywhere;
+}
+
+.address-card h3 {
+    margin-top: 12px;
+}
+
+.address-card p {
+    line-height: 1.6;
+    color: #555;
+}
+
+.address-type {
+    display: inline-block;
+    background: #e8f0ff;
+    color: #0755c9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.address-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.edit-btn {
+    background: #e7f0ff;
+    color: #0755c9;
+}
+
+.delete-btn {
+    background: #ffe8e8;
+    color: #c62828;
+}
+
+.default-btn {
+    background: #eee;
+    color: #333;
+}
+
+.form-box {
+    max-width: 600px;
+    margin-top: 25px;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.form-box h2 {
+    margin-top: 0;
+}
+
+.form-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-box textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.empty-message {
+    color: #666;
+    padding: 20px 0;
+}
+
+@media (max-width: 700px) {
+    .address-list {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .address-page {
+        padding: 15px;
+    }
+
+    .form-box {
+        padding: 16px;
+    }
+}

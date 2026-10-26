@@ -1,0 +1,153 @@
+
+/* Trending Offers Section */
+.trending-section {
+    width: calc(100% - 40px);
+    margin-bottom: 0px;
+    padding: 16px 12px;
+    border-radius: 16px;
+
+    /* Festive background */
+    background-image:url("1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+/* Section heading */
+.trending-title {
+    color: #590ec2;
+    font-size: 23px;
+    margin: 0 5px 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+/* Product cards container */
+.trending-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+
+    padding: 8px;
+    background: #fff;
+    border-radius: 13px;
+}
+
+/* Individual card */
+.trending-card {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+
+    color: #111;
+    text-decoration: none;
+    border-radius: 9px;
+
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.trending-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.13);
+}
+
+/* Product image area */
+.trending-image {
+    height: 350px;
+    width: 100% auto;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f3f3f3;
+}
+
+.trending-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+}
+
+.trending-card:hover .trending-image img {
+    transform: scale(1.05);
+}
+
+/* Product information */
+.trending-info {
+    padding: 7px 2px 5px;
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.trending-info p {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #222;
+}
+
+
+.trending-info h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #098d3b;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.trending-info del {
+    font-size: 12px;
+    color: #f61e1e;
+    text-decoration: line-through;
+    margin-left: 0;
+}
+
+.trending-info span{
+    color: #f61e1e;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .trending-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .trending-image {
+        height: 180px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .trending-section {
+        width: calc(100% - 20px);
+        padding: 12px 8px;
+        margin: 18px auto;
+    }
+
+    .trending-title {
+        font-size: 19px;
+    }
+
+    .trending-cards {
+        gap: 8px;
+        padding: 6px;
+    }
+
+    .trending-image {
+        height: 130px;
+    }
+
+    .trending-info p,
+    .trending-info h3 {
+        font-size: 12px;
+    }
+}

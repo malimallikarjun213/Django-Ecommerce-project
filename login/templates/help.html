@@ -1,0 +1,106 @@
+
+{% load static %}
+{% load i18n %}
+
+<head>
+<link rel="stylesheet" href="{% static 'css/help.css' %}">
+</head>
+{% block content %}
+<section class="help-page">
+
+    <div class="help-header">
+        <div class="help-icon">🎧</div>
+        <h1>{% trans "Help & Support" %}</h1>
+        <p>{% trans "We're here to help you with your shopping experience." %}</p>
+    </div>
+
+    <div class="help-search">
+        <span>🔍</span>
+        <input type="text" id="helpSearch"
+               placeholder="{% trans 'Search for help...' %}">
+    </div>
+
+    <h2>{% trans "How can we help you?" %}</h2>
+
+    <div class="help-cards">
+
+        <a href="#" class="help-card">
+            <div class="card-icon">📦</div>
+            <h3>{% trans "Orders & Delivery" %}</h3>
+            <p>{% trans "Track orders and check delivery status." %}</p>
+            <span>{% trans "View Orders" %} →</span>
+        </a>
+
+        <a href="#" class="help-card">
+            <div class="card-icon">💳</div>
+            <h3>{% trans "Payments" %}</h3>
+            <p>{% trans "Get help with payments and failed transactions." %}</p>
+            <span>{% trans "Learn More" %} →</span>
+        </a>
+
+        <a href="#" class="help-card">
+            <div class="card-icon">🔄</div>
+            <h3>{% trans "Returns & Refunds" %}</h3>
+            <p>{% trans "Learn about returns, exchanges and refunds." %}</p>
+            <span>{% trans "Learn More" %} →</span>
+        </a>
+
+        <a href="#" class="help-card">
+            <div class="card-icon">👤</div>
+            <h3>{% trans "Account & Profile" %}</h3>
+            <p>{% trans "Manage your account and personal details." %}</p>
+            <span>{% trans "Learn More" %} →</span>
+        </a>
+
+    </div>
+
+    <h2>{% trans "Frequently Asked Questions" %}</h2>
+
+    <div class="faq-list" id="faqList">
+
+        <details class="faq-item">
+            <summary>{% trans "How can I track my order?" %}</summary>
+            <p>{% trans "Open My Orders in your profile to check your order details and delivery status." %}</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>{% trans "How can I cancel an order?" %}</summary>
+            <p>{% trans "Open My Orders, select the order and use the cancellation option if it is available." %}</p>
+        </details>
+
+        <details class="faq-item" id="payments">
+            <summary>{% trans "What should I do if my payment fails?" %}</summary>
+            <p>{% trans "Check your payment status before trying again. If money was deducted, contact support with your transaction details." %}</p>
+        </details>
+
+        <details class="faq-item" id="returns">
+            <summary>{% trans "How do I request a return or refund?" %}</summary>
+            <p>{% trans "Check the product's return eligibility and the applicable return policy in your order details." %}</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>{% trans "How can I change my saved address?" %}</summary>
+            <p>{% trans "Open your profile and select Saved Address to manage your delivery addresses." %}</p>
+        </details>
+
+        <details class="faq-item" id="account">
+            <summary>{% trans "How can I change my password?" %}</summary>
+            <p>{% trans "Open Account Settings and select the Security & Password option." %}</p>
+        </details>
+
+    </div>
+
+    <div class="contact-support">
+        <div class="support-icon">💬</div>
+        <h2>{% trans "Still need help?" %}</h2>
+        <p>{% trans "Our support team is here to assist you." %}</p>
+
+        <a href="#" class="support-button">
+            ✉ {% trans "Contact Us" %}
+        </a>
+    </div>
+
+</section>
+
+<script src="{% static 'script/help.js' %}"></script>
+{% endblock %}

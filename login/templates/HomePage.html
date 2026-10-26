@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+ {% load static %}
+ {% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProShop Navigation</title>
+ <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/HomePage.css' %}">
+</head>
+
+<body>
+
+<nav class="pro-navbar">
+
+    <!-- Top section: Brand and mobile menu -->
+    <div class="nav-top">
+
+        <a href="#" class="brand-icon">
+            🛒 ProShop
+        </a>
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- Everything that adjusts on smaller screens -->
+    <div class="nav-content" id="navContent">
+
+        <!-- Navigation links -->
+        <ul class="nav-links">
+            <li><a href="#">{% trans "Home" %}</a></li>
+            <li><a href="#">{% trans "Shop" %}</a></li>
+            <li><a href="#">{% trans "Categories" %}</a></li>
+            <li><a href="#">{% trans "Deals" %}</a></li>
+            <li><a href="#">{% trans "AI Suggestions" %}</a></li>
+        </ul>
+
+        <!-- Search bar -->
+        <form class="nav-search" action="#" method="get">
+            <input
+                type="search"
+                name="q"
+                placeholder="Search for products..."
+                aria-label="Search for products">
+
+            <button type="submit" aria-label="Search">
+                ⌕
+            </button>
+        </form>
+
+        <!-- Icons and profile -->
+        <div class="nav-actions">
+
+            <a href="#" class="nav-icon" aria-label="Watchlist"
+               title="Watchlist">♡</a>
+
+            <a href="#" class="nav-icon" aria-label="Shopping cart"
+               title="Shopping cart">🛒</a>
+
+            <div class="profile-menu">
+
+                 <button
+                     id="profileToggle"
+                     class="profile-btn"
+                    aria-expanded="false"
+                    aria-controls="profileDropdown">
+                  👤 Profile ▼
+                </button>
+                <div class="dropdown" id="profileDropdown">
+                    <a href="{% url 'Myprofile' %}"><i class="fa-solid fa-user"></i> My Profile</a>
+                    <a href="#"><i class="fa-solid fa-box"></i> {% trans "My Orders" %}</a>
+                    <a href="#"><i class="fa-regular fa-heart"></i>{% trans "Watchlist" %}</a>
+                    <a href="#"><i class="fa-solid fa-heart"></i> Favorites</a>
+                    <a href="{% url 'setting' %}"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <a href="{% url 'terms_conditions' %}"><i class="fa-solid fa-circle-question"></i> Terms % conditions </a>
+                    <a href="#"><i class="fa-solid fa-headset"></i> Customer Care</a>
+                    <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+<div class="nav-bar1">
+
+    <!-- Navigation Viewport -->
+    <div class="nav-viewport" id="navViewport">
+
+        <div class="nav-track" id="navTrack">
+
+            <!-- Sliding Active Button -->
+            <div class="nav-indicator" id="navIndicator"></div>
+
+            <a href="#" class="nav-link active">
+              <i class="fa-solid fa-house"></i>
+                  <span>Home</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <span>Mobile</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-laptop"></i>
+                <span>Electronics</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-shirt"></i>
+                <span>Fashion</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-spa"></i>
+                <span>Beauty</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-futbol"></i>
+                <span>Sports</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-kitchen-set"></i>
+                <span>Home &amp; Kitchen</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Books</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-car"></i>
+                <span>Automotive</span>
+            </a>
+
+            
+
+            <a href="#" class="nav-link ai-link">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Suggestions</span>
+            </a>
+
+            <a href="#" class="nav-link deals-link">
+                <i class="fa-solid fa-tags"></i>
+                <span>Deals</span>
+            </a>
+             <a href="#" class="nav-link">
+                <i class="fa-solid fa-child"></i>
+                <span>Kids</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-ellipsis"></i>
+                <span>More</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+  {% include 'banner-slider.html' %} 
+<script src="{% static 'script/scripts.js' %}"></script>
+ <br><hr  style=" border: none; border-top: 2px dashed black; margin: 0px auto;"><br>
+<!-- Scrolling product cards -->
+ {% include 'image-slider1.html' %}
+    <br> <hr  style=" border: none; border-top: 2px dashed black; margin: 0px auto;"></br>
+<!--Recent view section -->
+{% include 'RecentelyViews.html' %}
+    <br> <hr  style=" border: none; border-top: 2px dashed black; margin: 0px auto;"><br>
+<!-- Trending offers section -->
+ {% include 'trending.html' %}
+   <br><hr  style=" border: none; border-top: 2px dashed black; margin: 0px auto;"><br>
+<!-- Top Deals Section -->
+ {% include 'top-deals.html' %}
+<br><hr  style=" border: none; border-top: 2px dashed black; margin: 0px auto;">
+<!-- Footer Section -->
+  {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,170 @@
+
+/* Main Terms Page */
+.terms-page {
+    width: min(100% - 36px, 1000px);
+    margin: 35px auto;
+    padding-bottom: 30px;
+    color: #20243a;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+.terms-header {
+    text-align: center;
+    padding: 38px 20px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #071442, #2448a5);
+    color: white;
+    box-shadow: 0 8px 25px rgba(7, 20, 66, 0.15);
+}
+
+.terms-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.terms-header h1 {
+    font-size: clamp(27px, 4vw, 38px);
+    margin: 0 0 12px;
+}
+
+.terms-header p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 auto 15px;
+    color: #e1e8ff;
+}
+
+.last-updated {
+    display: inline-block;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.13);
+}
+
+/* Individual Sections */
+.terms-card {
+    padding: 25px 28px;
+    margin-bottom: 18px;
+    background: #fff;
+    border: 1px solid #e5e9f2;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.045);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.terms-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
+
+.terms-card h2 {
+    color: #10255f;
+    font-size: 20px;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf0f6;
+}
+
+.terms-card p,
+.terms-card li {
+    color: #596174;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.terms-card p {
+    margin: 8px 0;
+}
+
+.terms-card ul {
+    padding-left: 22px;
+    margin: 0;
+}
+
+.terms-card li {
+    padding-left: 4px;
+    margin-bottom: 5px;
+}
+
+.terms-card li::marker {
+    color: #3159c9;
+}
+
+/* Contact Section */
+.terms-contact {
+    text-align: center;
+    padding: 30px 22px;
+    margin-top: 25px;
+    background: #f0f4ff;
+    border: 1px solid #dce5ff;
+    border-radius: 16px;
+}
+
+.contact-icon {
+    font-size: 35px;
+}
+
+.terms-contact h2 {
+    color: #10255f;
+    margin: 12px 0;
+}
+
+.terms-contact p {
+    color: #596174;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.contact-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 24px;
+    color: white;
+    background: #10255f;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.25s ease;
+}
+
+.contact-btn:hover {
+    background: #3159c9;
+}
+
+/* Footer */
+.terms-footer {
+    text-align: center;
+    padding-top: 22px;
+    color: #737b8c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .terms-page {
+        width: calc(100% - 20px);
+        margin: 18px auto;
+    }
+
+    .terms-header {
+        padding: 30px 15px;
+    }
+
+    .terms-card {
+        padding: 20px 17px;
+    }
+
+    .terms-card h2 {
+        font-size: 18px;
+    }
+
+    .terms-card p,
+    .terms-card li {
+        font-size: 13px;
+    }
+}

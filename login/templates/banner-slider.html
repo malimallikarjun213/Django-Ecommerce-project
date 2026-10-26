@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProShop Promotional Banners</title>
+    <link rel="stylesheet" href="{% static 'css/banner-slider.css' %}">
+</head>
+<body>
+
+<section class="banner-slider">
+
+    <div class="banner-track" id="bannerTrack">
+
+        <article class="banner banner-one">
+            <div class="banner-content">
+                <span class="banner-tag">PROSHOP SPECIAL</span>
+                <h2>Upgrade Your Bedroom</h2>
+                <p>Beautiful home essentials at amazing prices.</p>
+                <strong>UP TO 60% OFF</strong>
+            </div>
+        </article>
+
+        <article class="banner banner-two">
+            <div class="banner-content">
+                <span class="banner-tag">GARDEN COLLECTION</span>
+                <h2>Light Up Your Home</h2>
+                <p>Discover decorative lights and more.</p>
+                <strong>STARTING AT ₹199</strong>
+            </div>
+        </article>
+
+        <article class="banner banner-three">
+            <div class="banner-content">
+                <span class="banner-tag">SUMMER SPECIAL</span>
+                <h2>Stay Cool This Summer</h2>
+                <p>Explore fans and home appliances.</p>
+                <strong>UP TO 30% OFF</strong>
+            </div>
+        </article>
+        <article class="banner banner-four">
+            <div class="banner-content">
+                <span class="banner-tag">WINTER SALE</span>
+                <h2>Get Ready for Winter</h2>
+                <p>Warm up with our cozy collection.</p>
+                <strong>UP TO 40% OFF</strong>
+            </div>
+        </article>
+        <article class="banner banner-five">
+            <div class="banner-content">
+                <span class="banner-tag">NEW ARRIVALS</span>
+                <h2>Check Out Our Latest Products</h2>
+                <p>Discover the newest additions to our store.</p>
+                <strong>UP TO 50% OFF</strong>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Previous and next buttons -->
+    <button class="banner-arrow prev"
+            id="bannerPrev"
+            aria-label="Previous banner">
+        &#10094;
+    </button>
+
+    <button class="banner-arrow next"
+            id="bannerNext"
+            aria-label="Next banner">
+        &#10095;
+    </button>
+
+    <!-- Dots below the banner -->
+    <div class="banner-dots" id="bannerDots">
+        <button class="dot active" aria-label="Show banner 1"></button>
+        <button class="dot" aria-label="Show banner 2"></button>
+        <button class="dot" aria-label="Show banner 3"></button>
+        <button class="dot" aria-label="Show banner 4"></button>
+        <button class="dot" aria-label="Show banner 5"></button>
+    </div>
+
+</section>
+
+
+<script>
+    const track = document.getElementById("bannerTrack");
+    const slides = document.querySelectorAll(".banner");
+    const dots = document.querySelectorAll(".dot");
+    const prevButton = document.getElementById("bannerPrev");
+    const nextButton = document.getElementById("bannerNext");
+
+    let currentSlide = 0;
+    let autoSlide;
+
+    function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+
+        track.style.transform =
+            `translateX(-${currentSlide * 100}%)`;
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function startAutoSlide() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(nextSlide, 3500);
+    }
+
+    nextButton.addEventListener("click", () => {
+        nextSlide();
+        startAutoSlide();
+    });
+
+    prevButton.addEventListener("click", () => {
+        showSlide(currentSlide - 1);
+        startAutoSlide();
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            startAutoSlide();
+        });
+    });
+
+    // Pause automatic sliding when the pointer is over the banner
+    const slider = document.querySelector(".banner-slider");
+
+    slider.addEventListener("mouseenter", () => {
+        clearInterval(autoSlide);
+    });
+
+    slider.addEventListener("mouseleave", startAutoSlide);
+
+    // Support swipe gestures on mobile
+    let touchStartX = 0;
+
+    slider.addEventListener("touchstart", event => {
+        touchStartX = event.touches[0].clientX;
+    }, { passive: true });
+
+    slider.addEventListener("touchend", event => {
+        const difference =
+            event.changedTouches[0].clientX - touchStartX;
+
+        if (Math.abs(difference) > 40) {
+            showSlide(currentSlide + (difference < 0 ? 1 : -1));
+            startAutoSlide();
+        }
+    }, { passive: true });
+
+    startAutoSlide();
+</script>
+
+</body>
+</html>
