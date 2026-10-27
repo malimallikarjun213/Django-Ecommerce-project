@@ -1,0 +1,18 @@
+[
+{
+  "model": "login.notificationpreference",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "order_updates": false,
+    "offers_deals": true,
+    "wishlist_alerts": true,
+    "personalized_recommendations": false,
+    "security_alerts": false,
+    "email_notifications": false,
+    "sms_notifications": false,
+    "push_notifications": false,
+    "updated_at": "2026-10-27T09:54:30.626Z"
+  }
+}
+]

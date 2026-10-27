@@ -197,3 +197,51 @@ def cart_view(request):
         "cart_items": cart_items,
         "total": total,
     })
+
+
+def update_cart_quantity(request, id):
+    from django.views.decorators.http import require_POST
+
+    if request.method != "POST":
+        return redirect("cart")
+
+    cart = request.session.get("cart", {})
+    product_id = str(id)
+
+    if product_id not in cart:
+        return redirect("cart")
+
+    product = get_object_or_404(Product, id=id, is_active=True)
+    try:
+        quantity = int(request.POST.get("quantity", 1))
+    except (ValueError, TypeError):
+        return redirect("cart")
+
+    if quantity < 1:
+        quantity = 1
+
+    if quantity > product.stock:
+        quantity = product.stock
+
+    if quantity == 0:
+        cart.pop(product_id, None)
+    else:
+        cart[product_id] = quantity
+
+    request.session["cart"] = cart
+    request.session.modified = True
+
+    return redirect("cart")
+
+
+def remove_from_cart(request, id):
+    if request.method != "POST":
+        return redirect("cart")
+
+    cart = request.session.get("cart", {})
+    cart.pop(str(id), None)
+
+    request.session["cart"] = cart
+    request.session.modified = True
+
+    return redirect("cart")

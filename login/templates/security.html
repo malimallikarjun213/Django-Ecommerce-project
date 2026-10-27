@@ -196,13 +196,105 @@
             color: #94a3b8;
             font-size: 12px;
         }
-        .back-link {
-         display: inline-block;
-          margin-bottom: 25px;
-          color: #173b9a;
-         text-decoration: none;
-         font-weight: 600;
-          }
+         .back-link {
+    display: inline-block;
+    margin: 0 0 22px;
+    padding: 11px 18px;
+    color: #173b9a;
+    background: #c7c0c0;
+    border: 1px solid #dce3f5;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 30px black;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.back-link:hover {
+    background: #173b9a;
+    color: #fff;
+}
+       
+       
+/* Success alert: appears from the top and disappears upward */
+.success-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: max-content;
+    max-width: calc(100vw - 30px);
+    padding: 15px 20px;
+
+    color: #5b176c;
+    background: linear-gradient(110deg, #fff0f8, #f5eaff, #fff2e6);
+    border: 1px solid #edb6dd;
+    border-left: 5px solid #c13584;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(131, 58, 180, 0.18);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    opacity: 0;
+    transform: translate(-50%, -120px);
+    animation: alertFromTop 3.8s ease forwards;
+}
+
+.alert-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: 28px;
+    height: 28px;
+
+    color: white;
+    background: linear-gradient(135deg, #833ab4, #e1306c, #f77737);
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.alert-close {
+    margin-left: 8px;
+    padding: 0 0 0 5px;
+
+    color: #833ab4;
+    background: transparent;
+    border: none;
+
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@keyframes alertFromTop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -120px);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -120px);
+    }
+}
+
 
         @media (max-width: 480px) {
             body {
@@ -248,11 +340,21 @@
                 Enter your username and confirm your new password below.
             </p>
 
-            {% if success %}
-                <script>
-                    alert("{{ success }}");
-                </script>
-            {% endif %}
+            
+{% if success %}
+    <div class="success-alert" role="alert">
+        <span class="alert-icon">✓</span>
+        <span>🎉 Congratulations! {{ success }}</span>
+        <button
+            type="button"
+            class="alert-close"
+            aria-label="Close alert"
+            onclick="this.parentElement.remove()">
+            &times;
+        </button>
+    </div>
+{% endif %}
+
 
             {% if error1 %}
                 <p class="error-message">{{ error1 }}</p>
@@ -320,6 +422,20 @@
             message.style.display = "none";
         });
     }, 3000);
+    document.querySelectorAll(".toggle-password").forEach(function (button) {
+    button.addEventListener("click", function () {
+        const input = document.getElementById(this.dataset.target);
+
+        if (!input) return;
+
+        const showPassword = input.type === "password";
+
+        input.type = showPassword ? "text" : "password";
+
+        this.textContent = showPassword ? "Hide" : "Show";
+    });
+});
+
 </script>
 
 </body>

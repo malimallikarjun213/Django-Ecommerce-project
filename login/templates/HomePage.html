@@ -40,7 +40,7 @@
 
         <!-- Navigation links -->
         <ul class="nav-links">
-            <li><a href="#">{% trans "Home" %}</a></li>
+            <li><a href="{% url 'HomePage' %}">{% trans "Home" %}</a></li>
             <li><a href="#">{% trans "Shop" %}</a></li>
             <li><a href="#">{% trans "Categories" %}</a></li>
             <li><a href="#">{% trans "Deals" %}</a></li>
@@ -66,8 +66,13 @@
             <a href="#" class="nav-icon" aria-label="Watchlist"
                title="Watchlist">♡</a>
 
-            <a href="#" class="nav-icon" aria-label="Shopping cart"
-               title="Shopping cart">🛒</a>
+            <a href="{% url 'cart'%}" class="nav-icon" aria-label="Shopping cart"
+               title="Shopping cart">
+               <span class="cart-icon">🛒</span>
+               <span class="cart-count" id="cartCount">
+                 {{ cart_items_count|default:0 }}
+               </span>
+             </a>
 
             <div class="profile-menu">
 
@@ -84,7 +89,7 @@
                     <a href="#"><i class="fa-regular fa-heart"></i>{% trans "Watchlist" %}</a>
                     <a href="#"><i class="fa-solid fa-heart"></i> Favorites</a>
                     <a href="{% url 'setting' %}"><i class="fa-solid fa-gear"></i> Settings</a>
-                    <a href="{% url 'terms_conditions' %}"><i class="fa-solid fa-circle-question"></i> Terms % conditions </a>
+                    <a href="{% url 'saved_address' %}"><i class="fa-solid fa-map-marker-alt"></i>Location</a>
                     <a href="#"><i class="fa-solid fa-headset"></i> Customer Care</a>
                     <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 
@@ -107,22 +112,22 @@
             <!-- Sliding Active Button -->
             <div class="nav-indicator" id="navIndicator"></div>
 
-            <a href="#" class="nav-link active">
+            <a href="{% url 'HomePage' %}" class="nav-link active">
               <i class="fa-solid fa-house"></i>
                   <span>Home</span>
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{% url 'category_detail' 'Mobiles' %}" class="nav-link">
                 <i class="fa-solid fa-mobile-screen-button"></i>
                 <span>Mobile</span>
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{% url 'category_detail' 'Electronic' %}" class="nav-link">
                 <i class="fa-solid fa-laptop"></i>
                 <span>Electronics</span>
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{% url 'category_detail' 'fashion' %}" class="nav-link">
                 <i class="fa-solid fa-shirt"></i>
                 <span>Fashion</span>
             </a>

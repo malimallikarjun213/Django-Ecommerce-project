@@ -136,13 +136,35 @@ body {
 }
 
 .nav-icon {
+     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    color: white;
+    padding: 8px;
     text-decoration: none;
-    font-size: clamp(22px, 1.8vw, 28px);
+}
+
+.cart-icon {
+    font-size: 20px;
+}
+
+/* Small circular cart count badge */
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff3366;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 50%;
+    box-sizing: border-box;
     line-height: 1;
 }
 
@@ -246,7 +268,7 @@ body {
     padding: 0 10px;
     gap: 10px;
     overflow-y: hidden;
-    background: #5b8bb9;
+    background: #2787e8;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 

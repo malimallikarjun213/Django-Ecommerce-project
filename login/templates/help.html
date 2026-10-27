@@ -1,13 +1,14 @@
 
 {% load static %}
 {% load i18n %}
-
+<html>
 <head>
 <link rel="stylesheet" href="{% static 'css/help.css' %}">
 </head>
 {% block content %}
+<body>
 <section class="help-page">
-
+      <a href="{% url 'setting' %}" class="back-link"> ← back </a>
     <div class="help-header">
         <div class="help-icon">🎧</div>
         <h1>{% trans "Help & Support" %}</h1>
@@ -104,3 +105,5 @@
 
 <script src="{% static 'script/help.js' %}"></script>
 {% endblock %}
+</body>
+</html>

@@ -1,11 +1,20 @@
 
 /* Main Terms Page */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f7fc;
+    font-family: Arial, sans-serif;
+}
+
 .terms-page {
     width: min(100% - 36px, 1000px);
     margin: 35px auto;
     padding-bottom: 30px;
     color: #20243a;
-    font-family: Arial, sans-serif;
 }
 
 /* Header */
@@ -43,6 +52,8 @@
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.13);
 }
+
+/* Back Button */
 
 /* Individual Sections */
 .terms-card {
@@ -134,7 +145,6 @@
 .contact-btn:hover {
     background: #3159c9;
 }
-
 /* Footer */
 .terms-footer {
     text-align: center;
@@ -166,5 +176,6 @@
     .terms-card p,
     .terms-card li {
         font-size: 13px;
+
     }
 }

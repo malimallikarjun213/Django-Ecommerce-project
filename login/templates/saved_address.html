@@ -1,18 +1,188 @@
+<html>
+<style>
+body{background-color: rgb(7, 34, 167);}
+.address-page {
+    padding: 25px;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
 
-{% extends "profile-base.html" %}
-{% load static %}
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-{% block title %}Saved Addresses | ProShop{% endblock %}
+.page-header h1 {
+    color: wheat;
+    margin: 0 0 8px;
+}
 
-{% block extra_css %}
-<link rel="stylesheet"
-      href="{% static 'css/saved_address.css' %}">
-{% endblock %}
+.page-header p {
+    color: #f8f9f7;
+    margin: 0;
+}
 
-{% block content %}
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
+#addAddressBtn,
+#saveBtn {
+    background: #0c9e11;
+    color: white;
+}
+
+#cancelBtn {
+    background: #e22424;
+    color: #222;
+}
+
+.address-list {
+    display: contents;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    height: 2px;
+    width:80%;
+
+}
+
+.address-card {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    background: rgb(180, 157, 202);
+    box-shadow: 0 2px 8px #13cd760d;
+    overflow-wrap: anywhere;
+    margin: 20px;
+}
+
+.address-card h3 {
+    color: rgb(9, 9, 9);
+    margin-top: 12px;
+}
+
+.address-card p {
+    line-height: 1.6;
+    color: #555;
+}
+
+.address-type {
+    display:inline-block;
+    background: #34832b;
+    color: #aeb2b9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.address-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.edit-btn {
+    background: #e7f0ff;
+    color: #0755c9;
+}
+
+.delete-btn {
+    background: #ffe8e8;
+    color: #c62828;
+}
+
+.default-btn {
+    background: #eee;
+    color: #333;
+}
+
+.form-box {
+    max-width: 600px;
+    margin-top: 25px;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.form-box h2 {
+    margin-top: 0;
+}
+
+.form-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-box textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.empty-message {
+    color: #666;
+    padding: 20px 0;
+}
+
+@media (max-width: 700px) {
+    .address-list {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .address-page {
+        padding: 15px;
+    }
+
+    .form-box {
+        padding: 16px;
+    }
+}
+.back-link{
+            display: inline-block;
+          margin-bottom: 25px;
+          color: #173b9a;
+         text-decoration: none;
+         background-color: aliceblue;
+         font-weight: 600;
+         box-shadow: inset;
+            }
+.back-link:hover{background-color: rgb(138, 42, 87);}
+</style>
+<body>
 <div class="address-page">
-
+    <a href="{% url 'HomePage' %}" ><button class="back-link">← Back to home</button></a>
     <div class="page-header">
         <div>
             <h1>Saved Addresses</h1>
@@ -78,9 +248,212 @@
     </div>
 
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-{% endblock %}
+    const addButton = document.getElementById("addAddressBtn");
+    const addressList = document.getElementById("addressList");
+    const addressFormBox = document.getElementById("addressFormBox");
+    const addressForm = document.getElementById("addressForm");
+    const cancelButton = document.getElementById("cancelBtn");
+    const formTitle = document.getElementById("formTitle");
 
-{% block extra_js %}
-<script src="{% static 'script/saved_address.js' %}" defer></script>
-{% endblock %}
+    const addressId = document.getElementById("addressId");
+    const fullName = document.getElementById("fullName");
+    const phone = document.getElementById("phone");
+    const fullAddress = document.getElementById("fullAddress");
+    const city = document.getElementById("city");
+    const state = document.getElementById("state");
+    const pincode = document.getElementById("pincode");
+    const addressType = document.getElementById("addressType");
+
+    let addresses = [];
+
+    // Load addresses from browser storage
+    try {
+        addresses = JSON.parse(
+            localStorage.getItem("proshopAddresses") || "[]"
+        );
+
+        if (!Array.isArray(addresses)) {
+            addresses = [];
+        }
+    } catch (error) {
+        addresses = [];
+    }
+
+    // Save addresses in browser storage
+    function saveAddresses() {
+        try {
+            localStorage.setItem(
+                "proshopAddresses",
+                JSON.stringify(addresses)
+            );
+            return true;
+        } catch (error) {
+            alert("Could not save addresses in this browser.");
+            return false;
+        }
+    }
+
+    // Show the form
+    function showForm(address = null) {
+        addressForm.reset();
+
+        if (address) {
+            formTitle.textContent = "Edit Address";
+
+            addressId.value = address.id;
+            fullName.value = address.name;
+            phone.value = address.phone;
+            fullAddress.value = address.address;
+            city.value = address.city;
+            state.value = address.state;
+            pincode.value = address.pincode;
+            addressType.value = address.type;
+        } else {
+            formTitle.textContent = "Add New Address";
+            addressId.value = "";
+        }
+
+        addressFormBox.hidden = false;
+        addressFormBox.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    // Hide the form
+    function hideForm() {
+        addressFormBox.hidden = true;
+        addressForm.reset();
+        addressId.value = "";
+    }
+
+    // Display all addresses
+    function displayAddresses() {
+        addressList.replaceChildren();
+
+        if (addresses.length === 0) {
+            const message = document.createElement("p");
+            message.className = "empty-message";
+            message.textContent = "No saved addresses yet.";
+            addressList.appendChild(message);
+            return;
+        }
+
+        addresses.forEach(function (address) {
+            const card = document.createElement("div");
+            card.className = "address-card";
+
+            const type = document.createElement("span");
+            type.className = "address-type";
+            type.textContent = address.type;
+
+            const heading = document.createElement("h3");
+            heading.textContent = address.name;
+
+            const phoneText = document.createElement("p");
+            phoneText.textContent = "Phone: " + address.phone;
+
+            const addressText = document.createElement("p");
+            addressText.textContent = address.address;
+
+            const locationText = document.createElement("p");
+            locationText.textContent =
+                address.city + ", " + address.state +
+                " - " + address.pincode;
+
+            const actions = document.createElement("div");
+            actions.className = "address-actions";
+
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.className = "edit-btn";
+            editButton.textContent = "Edit";
+
+            editButton.addEventListener("click", function () {
+                showForm(address);
+            });
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete";
+
+            deleteButton.addEventListener("click", function () {
+                if (confirm("Do you want to delete this address?")) {
+                    addresses = addresses.filter(function (item) {
+                        return item.id !== address.id;
+                    });
+
+                    if (saveAddresses()) {
+                        displayAddresses();
+                    }
+                }
+            });
+
+            actions.appendChild(editButton);
+            actions.appendChild(deleteButton);
+
+            card.appendChild(type);
+            card.appendChild(heading);
+            card.appendChild(phoneText);
+            card.appendChild(addressText);
+            card.appendChild(locationText);
+            card.appendChild(actions);
+
+            addressList.appendChild(card);
+        });
+    }
+
+    // Add new address button
+    addButton.addEventListener("click", function () {
+        showForm();
+    });
+
+    // Cancel button
+    cancelButton.addEventListener("click", hideForm);
+
+    // Save new address or update existing address
+    addressForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!addressForm.reportValidity()) {
+            return;
+        }
+
+        const existingId = addressId.value;
+
+        const newAddress = {
+            id: existingId || String(Date.now()),
+            name: fullName.value.trim(),
+            phone: phone.value.trim(),
+            address: fullAddress.value.trim(),
+            city: city.value.trim(),
+            state: state.value.trim(),
+            pincode: pincode.value.trim(),
+            type: addressType.value
+        };
+
+        if (existingId) {
+            addresses = addresses.map(function (item) {
+                return item.id === existingId ? newAddress : item;
+            });
+        } else {
+            addresses.push(newAddress);
+        }
+
+        if (saveAddresses()) {
+            displayAddresses();
+            hideForm();
+        }
+    });
+
+    // Show saved addresses when page opens
+    displayAddresses();
+
+});
+</script>
+</body>
+</html>

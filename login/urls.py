@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .views import  category_page, category_detail
 urlpatterns = [
     path("", views.user_login, name="login"),
     path("register/", views.register, name="register"),
@@ -14,4 +14,11 @@ urlpatterns = [
     path("language/",views.language,name="language"),
     path("help/",views.help,name="help"),
     path("security/",views.security,name="security"),
+    path('page/', category_page, name='category_page'),
+    path(
+            'category/<str:category_name>/',
+            category_detail,
+            name='category_detail'
+        ),
+    path('notification/',views.notification,name="notification")
 ]

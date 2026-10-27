@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.http import     HttpResponse
@@ -133,6 +133,110 @@ def security(request):
             user = User.objects.get(username=username)
             user.set_password(new_password)
             user.save()
-            return render(request, "setting.html", {"success": "Password updated successfully."})
+            return render(request, "security.html", {"success": "Password updated successfully."})
     
     return render(request, "security.html")
+
+from categories.models import Category
+from products.models import Product
+def category_page(request):
+    categories = Category.objects.filter(is_active=True)
+
+    return render(
+        request,
+        'categories/category_list.html',
+        {'categories': categories}
+    )
+"""""
+#This code is for product access using id
+def category_detail(request, category_id):
+    category = get_object_or_404(
+        Category,
+        id=category_id,
+        is_active=True
+    )
+
+    products = Product.objects.filter(
+        category=category,
+        is_active=True
+    ).select_related('category')
+
+    return render(
+        request,
+        'categories/category_detail.html',
+        {
+            'category': category,
+            'products': products,
+        }
+    )
+"""
+#This code is for product access using name
+def category_detail(request, category_name):
+    category = get_object_or_404(
+        Category,
+        name__iexact=category_name,
+        is_active=True
+    )
+
+    products = Product.objects.filter(
+        category=category,
+        is_active=True
+    ).select_related('category')
+
+    return render(
+        request,
+        'categories/category_detail.html',
+        {
+            'category': category,
+            'products': products,
+        }
+    )
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import NotificationPreference
+
+@login_required
+def notification(request):
+    # Get this user's record, creating it with defaults if necessary.
+    preferences, created = NotificationPreference.objects.get_or_create(
+        user=request.user
+    )
+
+    if request.method == "POST":
+        # Read checkbox values. Unchecked checkboxes are not sent by HTML.
+        preferences.order_updates = (
+            request.POST.get("order_updates") == "on"
+        )
+        preferences.offers_deals = (
+            request.POST.get("offers_deals") == "on"
+        )
+        preferences.wishlist_alerts = (
+            request.POST.get("wishlist_alerts") == "on"
+        )
+        preferences.personalized_recommendations = (
+            request.POST.get("personalized_recommendations") == "on"
+        )
+        preferences.security_alerts = (
+            request.POST.get("security_alerts") == "on"
+        )
+
+        preferences.email_notifications = (
+            request.POST.get("email_notifications") == "on"
+        )
+        preferences.sms_notifications = (
+            request.POST.get("sms_notifications") == "on"
+        )
+        preferences.push_notifications = (
+            request.POST.get("push_notifications") == "on"
+        )
+
+        preferences.save()
+
+        messages.success(
+            request,
+            "Your notification preferences have been saved."
+        )
+
+        return redirect("notification")
+
+    return render(request,"notification.html",{"preferences": preferences},)

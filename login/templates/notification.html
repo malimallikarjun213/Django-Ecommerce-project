@@ -1,0 +1,272 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notification Settings | ProShop</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/notification.css' %}">
+
+    <script src="{% static 'script/notification.js' %}"
+            defer></script>
+</head>
+<body>
+
+<div class="notification-page">
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <a href="{% url 'setting' %}" class="back-link">← Back to Home</a>
+        
+            {% if messages %}
+            {% for message in messages %}
+            <div class="success-alert" role="alert">
+                <span class="alert-icon">✓</span>
+                <span>{{ message }}</span>
+                <button type="button"
+                        class="alert-close"
+                        aria-label="Close alert"
+                        onclick="this.parentElement.remove()">
+                    &times;
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        <div class="header-content">
+            
+            <div class="header-icon">🔔</div>
+            <div>
+                <h1>Notification Settings</h1>
+                <p>Stay updated with everything happening at ProShop.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Summary Card -->
+    <section class="summary-card">
+        <div class="summary-text">
+            <span class="eyebrow">YOUR PREFERENCES</span>
+            <h2>Stay in the loop!</h2>
+            <p>
+                Choose which updates you want to receive.
+                You're always in control.
+            </p>
+            <span class="status-pill" id="notificationStatus">
+                Notifications enabled
+            </span>
+        </div>
+
+        <div class="summary-emoji" aria-hidden="true">📬</div>
+    </section>
+ <form method="post" id="notificationForm">
+    {% csrf_token %}
+    <main class="settings-layout">
+
+        <!-- Notification Categories -->
+        <section class="settings-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Notification Preferences</h2>
+                    <p>Turn individual notification types on or off.</p>
+                </div>
+                <span class="heading-icon">⚙️</span>
+            </div>
+
+            <!-- Master Toggle -->
+            <div class="master-setting">
+                <div class="setting-icon master-icon">🔔</div>
+                <div class="setting-info">
+                    <h3>All Notifications</h3>
+                    <p>Enable or disable all optional notifications.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="masterToggle"
+                           aria-label="Enable all notifications" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon order-icon">📦</div>
+                <div class="setting-info">
+                    <h3>Order Updates</h3>
+                    <p>Order confirmation, shipping, delivery and cancellations.</p>
+                    <span class="tag">Recommended</span>
+                </div>
+                <label class="switch">
+                    <!-- Order Updates -->
+                     <input type="checkbox" class="notification-toggle"
+                         name="order_updates"
+                         {% if preferences.order_updates %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon offer-icon">🏷️</div>
+                <div class="setting-info">
+                    <h3>Offers & Deals</h3>
+                    <p>Exclusive discounts, coupons and seasonal sales.</p>
+                </div>
+                <label class="switch">
+                    <!-- Offers & Deals -->
+                      <input type="checkbox" class="notification-toggle"
+                           name="offers_deals"
+                          {% if preferences.offers_deals %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon wishlist-icon">❤️</div>
+                <div class="setting-info">
+                    <h3>Wishlist Alerts</h3>
+                    <p>Price drops and restocks for your favorite products.</p>
+                </div>
+                <label class="switch">
+                    <!-- Wishlist Alerts -->
+                    <input type="checkbox" class="notification-toggle"
+                       name="wishlist_alerts"
+                      {% if preferences.wishlist_alerts %}checked{% endif %}>
+
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon recommendation-icon">✨</div>
+                <div class="setting-info">
+                    <h3>Personalized Recommendations</h3>
+                    <p>Product suggestions selected for your interests.</p>
+                </div>
+                <label class="switch">
+                    <!-- Personalized Recommendations -->
+                     <input type="checkbox" class="notification-toggle"
+                        name="personalized_recommendations"
+                          {% if preferences.personalized_recommendations %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon security-icon">🛡️</div>
+                <div class="setting-info">
+                    <h3>Security Alerts</h3>
+                    <p>Important account activity and security notifications.</p>
+                    <span class="tag security-tag">Important</span>
+                </div>
+                <label class="switch">
+                    <!-- Security Alerts -->
+                        <input type="checkbox" class="notification-toggle"
+                           name="security_alerts"
+                          {% if preferences.security_alerts %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <p class="security-note">
+                🔐 Essential security messages may still be sent when
+                optional notifications are disabled.
+            </p>
+        </section>
+
+        <!-- Delivery Methods -->
+        <section class="settings-card delivery-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Delivery Methods</h2>
+                    <p>Choose how you receive updates.</p>
+                </div>
+                <span class="heading-icon">📲</span>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon email-icon">✉️</div>
+                <div class="setting-info">
+                    <h3>Email Notifications</h3>
+                    <p>Updates and offers delivered to your inbox.</p>
+                </div>
+                <label class="switch">
+                    <!-- Email Notifications -->
+                      <input type="checkbox" class="notification-toggle"
+                       name="email_notifications"
+                         {% if preferences.email_notifications %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon sms-icon">💬</div>
+                <div class="setting-info">
+                    <h3>SMS Notifications</h3>
+                    <p>Order updates and important alerts by text.</p>
+                </div>
+                <label class="switch">
+                    <!-- SMS Notifications -->
+                      <input type="checkbox" class="notification-toggle"
+                           name="sms_notifications"
+                            {% if preferences.sms_notifications %}checked{% endif %}>
+
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-icon push-icon">📱</div>
+                <div class="setting-info">
+                    <h3>Push Notifications</h3>
+                    <p>Instant alerts on supported devices and browsers.</p>
+                </div>
+                <label class="switch">
+                   
+                      <!-- Push Notifications -->
+                       <input type="checkbox" class="notification-toggle"
+                            name="push_notifications"
+                             {% if preferences.push_notifications %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="privacy-note">
+                <span>🔒</span>
+                <p>
+                    Your preferences help personalize your experience.
+                    We won't request browser notification permission
+                    unless you choose to enable actual push notifications.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Action Buttons -->
+    <footer class="action-footer">
+        <p id="saveMessage" role="status" aria-live="polite">
+            Your preferences are ready to save.
+        </p>
+        
+        
+        <div class="action-buttons">
+           <button type="button" id="resetButton" class="reset-btn">
+                Reset Defaults
+              </button>
+
+            <button type="submit" id="saveButton" class="save-btn">
+                ✓ Save Preferences
+            </button>
+        </div>
+    </footer>
+   </form>
+    <p class="footer-text">
+        Made with ❤️ for your shopping experience · ProShop
+    </p>
+
+</div>
+
+</body>
+</html>

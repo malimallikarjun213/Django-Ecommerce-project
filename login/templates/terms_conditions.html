@@ -1,34 +1,139 @@
 
 {% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/terms_conditions.css' %}">
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block content %}
- 
-<section class="terms-container">
-    <a href="{% url 'setting' %}"> <button> < back </button></a>
-    <h1>📜 Terms & Conditions</h1>
+    <title>Terms & Conditions | ProShop</title>
 
-    <p>Welcome to ProShop. By using our website, you agree to these terms and conditions.</p>
+    <link rel="stylesheet" href="{% static 'css/terms_conditions.css' %}">
+</head>
+<style>
+    .back-link {
+    display: inline-block;
+    margin: 0 0 22px;
+    padding: 11px 18px;
+    color: #173b9a;
+    background: #c7c0c0;
+    border: 1px solid #dce3f5;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 30px black;
+    transition: background 0.25s ease, color 0.25s ease;
+}
 
-    <h2>1. General Terms</h2>
-    <p>Use ProShop responsibly and provide accurate information when placing orders.</p>
+.back-link:hover {
+    background: #173b9a;
+    color: #fff;
+}
+</style>
+<body>
 
-    <h2>2. Products and Pricing</h2>
-    <p>Product details, availability, and prices may change without prior notice.</p>
+<section class="terms-page">
 
-    <h2>3. Orders and Payments</h2>
-    <p>Orders are subject to confirmation and product availability.</p>
+    <header class="terms-header">
+        <div class="terms-icon">📜</div>
+        <h1>Terms & Conditions</h1>
+        <p>
+            Welcome to ProShop! Please read our terms and conditions
+            carefully before using our website.
+        </p>
+        <span class="last-updated">Last Updated: October 2026</span>
+    </header>
 
-    <h2>4. Returns and Refunds</h2>
-    <p>Returns and refunds are subject to the applicable ProShop return policy.</p>
+    <a href="{% url 'setting' %}" class="back-link"> 
+        ← Back to Settings </a>
+    
 
-    <h2>5. Privacy</h2>
-    <p>Your personal information will be handled according to our privacy policy.</p>
+    <div class="terms-card">
+        <h2>1. General Terms</h2>
+        <p>
+            By accessing or using ProShop, you agree to comply with
+            these terms and conditions. Please provide accurate
+            information when creating an account and placing orders.
+        </p>
+    </div>
 
-    <h2>6. Contact Us</h2>
-    <p>Contact ProShop support if you have questions about these terms.</p>
+    <div class="terms-card">
+        <h2>2. Products and Pricing</h2>
+        <p>
+            We aim to display accurate product descriptions, images,
+            prices, and availability. Product information and prices
+            may change without prior notice. Orders are subject to
+            product availability.
+        </p>
+    </div>
+
+    <div class="terms-card">
+        <h2>3. Orders and Payments</h2>
+        <p>
+            Orders are subject to confirmation. Customers must provide
+            accurate delivery and payment information. An order may be
+            cancelled if a product is unavailable or a payment cannot
+            be verified, subject to applicable law.
+        </p>
+    </div>
+
+    <div class="terms-card">
+        <h2>4. Returns and Refunds</h2>
+        <p>
+            Returns, replacements, cancellations, and refunds are
+            governed by the applicable ProShop return policy.
+            Please review the relevant policy before placing an order.
+        </p>
+    </div>
+
+    <div class="terms-card">
+        <h2>5. Privacy and Security</h2>
+        <p>
+            We handle personal information according to our privacy
+            policy and applicable data protection laws. Please keep
+            your account credentials secure and notify us of any
+            suspected unauthorized access.
+        </p>
+    </div>
+
+    <div class="terms-card">
+        <h2>6. User Responsibilities</h2>
+        <ul>
+            <li>Provide accurate account and delivery information.</li>
+            <li>Do not misuse the website or attempt unauthorized access.</li>
+            <li>Do not submit fraudulent orders or payment details.</li>
+            <li>Respect the rights of other users and ProShop.</li>
+        </ul>
+    </div>
+
+    <div class="terms-card">
+        <h2>7. Changes to These Terms</h2>
+        <p>
+            ProShop may update these terms when necessary. Any changes
+            will be published on this page, together with an updated
+            revision date where appropriate.
+        </p>
+    </div>
+
+    <div class="terms-contact">
+        <div class="contact-icon">💬</div>
+        <h2>Have Questions?</h2>
+        <p>
+            If you have questions about these terms, please contact
+            our support team.
+        </p>
+        <a href="{% url 'help' %}" class="contact-btn">
+            Contact Support →
+        </a>
+    </div>
+
+    <footer class="terms-footer">
+        <p>© 2026 ProShop. All rights reserved.</p>
+        <p>Please review our policies before shopping with us.</p>
+    </footer>
+
 </section>
 
-{% endblock %}
+</body>
+</html>

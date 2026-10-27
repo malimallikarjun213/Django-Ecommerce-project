@@ -1,14 +1,252 @@
 
 
 {% load static %}
-{% block extra_css %}
+<head>
 <link rel="stylesheet" href="{% static 'css/setting.css' %}">
-{% endblock %}
+</head>
+<style>
+    body{background-color: #607D8B;}
+/* Settings Page */
+.settings-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 5px 30px;
+    box-sizing: border-box;
+    color: #172033;
+}
 
-{% block content %}
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding: 25px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #071242, #263e85);
+    color: #fff;
+}
 
+.settings-header h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.settings-header p {
+    margin: 0;
+    color: #dce5ff;
+    font-size: 15px;
+}
+
+.settings-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.14);
+    font-size: 34px;
+}
+
+.settings-grid {
+   display: table-row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    color: #f189f9;
+}
+
+.settings-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width:1000px;
+    margin: 10px 0px;
+    padding: 22px;
+    border: 1px solid #e5e9f2;
+    border-radius: 14px;
+    background-color: #e9e9f1;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(20, 35, 75, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.settings-card:hover {
+    transform: translateY(-3px);
+    border-color: #aabaf5;
+    box-shadow: 0 9px 24px rgba(20, 35, 75, 0.11);
+}
+
+.settings-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 13px;
+    font-size: 25px;
+}
+
+.account-icon {
+    background: #e8edff;
+}
+
+.security-icon {
+    background: #e2f8ed;
+}
+
+.notification-icon {
+    background: #fff2d9;
+}
+
+.preference-icon {
+    background: #f3e8ff;
+}
+
+.settings-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.settings-card-content h3 {
+    margin: 0 0 8px;
+    color: #172033;
+    font-size: 17px;
+}
+
+.settings-card-content p {
+    margin: 0;
+    color: #687386;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.settings-arrow {
+    flex-shrink: 0;
+    color: #7b8799;
+    font-size: 29px;
+}
+
+.settings-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #24272e;
+    color: #53648e;
+    text-align: center;
+}
+
+.settings-footer span {
+    font-size: 22px;
+}
+
+.settings-footer p {
+    margin: 0;
+    font-size: 14px;
+    color:whitesmoke;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .settings-grid {
+        gap: 14px;
+    }
+
+    .settings-card {
+        padding: 17px;
+        gap: 12px;
+    }
+}
+ .back-link {
+    display: inline-block;
+    margin: 0 0 22px;
+    padding: 11px 18px;
+    color: #173b9a;
+    background: #c7c0c0;
+    border: 1px solid #dce3f5;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 30px black;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.back-link:hover {
+    background: #173b9a;
+    color: #fff;
+}
+/* Mobile */
+@media (max-width: 600px) {
+    .settings-page {
+        padding: 5px 0 20px;
+    }
+
+    .settings-header {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .settings-header h1 {
+        font-size: 25px;
+    }
+
+    .settings-header p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .settings-header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        font-size: 27px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .settings-card {
+        padding: 17px;
+    }
+
+    .settings-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+
+    .settings-card-content h3 {
+        font-size: 15px;
+    }
+
+    .settings-card-content p {
+        font-size: 12px;
+    }
+
+    .settings-footer {
+        padding: 15px 10px;
+    }
+}
+
+</style>
+<body>
 <section class="settings-page">
-
+ <a href="{% url 'HomePage' %}" class="back-link">← Back to Home</a>
     <div class="settings-header">
         <div>
             <h1>Settings</h1>
@@ -40,7 +278,7 @@
         </a>
 
         <!-- Notifications -->
-        <a href="#" class="settings-card">
+        <a href="{% url 'notification' %}" class="settings-card">
             <div class="settings-icon notification-icon">🔔</div>
             <div class="settings-card-content">
                 <h3>Notifications</h3>
@@ -78,16 +316,16 @@
             <span class="settings-arrow">›</span>
         </a>
     </div>
-
     <div class="settings-footer">
         <span>🛍️</span>
         <p>Your shopping experience, your way.</p>
     </div>
 
+    
 </section>
 
-{% endblock %}
 
-{% block extra_js %}
+
+
 <script src="{% static 'script/setting.js' %}"></script>
-{% endblock %}
+</body>
