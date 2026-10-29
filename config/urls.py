@@ -58,6 +58,7 @@ urlpatterns = [
         TemplateView.as_view(template_name='language.html'),
         name='language_settings'
     ),
+    path("orders/", include("orders.urls")),
 ]
 
 if settings.DEBUG:

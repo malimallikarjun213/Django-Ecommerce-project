@@ -864,13 +864,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (placeOrderBtn) {
         placeOrderBtn.addEventListener("click", function () {
-            alert("Your checkout or place-order URL still needs to be connected.");
+            window.location.href = "/orders/address/";
         });
     }
 
     updateCartTotals();
 });
-
 </script>
 </body>
 </html>
