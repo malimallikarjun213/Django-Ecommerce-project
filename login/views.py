@@ -182,13 +182,16 @@ def category_detail(request, category_name):
         category=category,
         is_active=True
     ).select_related('category')
-
+    show_sidebar = request.GET.get('source') == 'categories'
+    categories = Category.objects.filter(is_active=True)
     return render(
         request,
         'categories/category_detail.html',
         {
             'category': category,
             'products': products,
+            'show_sidebar':show_sidebar,
+            'categories': categories,
         }
     )
 from django.contrib import messages
@@ -240,3 +243,31 @@ def notification(request):
         return redirect("notification")
 
     return render(request,"notification.html",{"preferences": preferences},)
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+def contact_us(request):
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "").strip()
+        order_id = request.POST.get("order_id", "").strip()
+        message = request.POST.get("message", "").strip()
+
+        if not all([name, email, subject, message]):
+            messages.error(request, "Please fill in all required fields.")
+            return redirect("contact_us")
+
+        # We will save the message to the database
+        # after creating the ContactMessage model.
+
+        messages.success(
+            request,
+            "Thank you! Your message has been received. our team will  contact you soon"
+        )
+        return redirect("contact_us")
+
+    return render(request, "contact_us.html")
+

@@ -1,165 +1,961 @@
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ category.name }} | FiltrCart</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
     <style>
-        body {
-            background: #f1f3f6;
+        :root {
+            --navy: #10143f;
+            --purple: #7357ff;
+            --pink: #e84da8;
+            --lavender: #f1edff;
+            --page-bg: #f7f7fc;
+            --text: #242442;
+            --muted: #777990;
         }
 
-        .navbar {
-            background: #2874f0;
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* NAVBAR */
+        .topbar {
+            flex: 0 0 auto;
+            min-height: 68px;
+            background: linear-gradient(110deg, #10143f, #29276d);
+            box-shadow: 0 5px 20px #17144225;
+        }
+
+        .brand {
+            color: white;
+            font-size: 23px;
+            font-weight: 850;
+            letter-spacing: -.6px;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #ff9ed7;
+        }
+
+        .nav-pill {
+            color: #f3f0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .nav-pill:hover {
+            background: #ffffff19;
+            color: white;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: white;
+            background: #ffffff18;
+            border: 1px solid #ffffff35;
+            border-radius: 12px;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .back-link:hover {
+            background: white;
+            color: var(--navy);
+        }
+
+        /* PAGE LAYOUT */
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+            gap: 22px;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .shop-layout.no-sidebar {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        /* HIDE SCROLLBAR, KEEP SCROLLING */
+        .sidebar,
+        .main-content {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .sidebar::-webkit-scrollbar,
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: white;
+            border: 1px solid #ece9fa;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px #2520520a;
+        }
+
+        .sidebar-banner {
+            padding: 23px 18px;
+            color: white;
+            background: linear-gradient(145deg, #7657ff, #c64fc9, #f080ba);
+        }
+
+        .sidebar-banner .eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.7px;
+            font-weight: 800;
+            opacity: .85;
+        }
+
+        .sidebar-banner h5 {
+            font-weight: 850;
+            margin: 10px 0 6px;
+        }
+
+        .sidebar-banner p {
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 0;
+            color: #fff1ff;
+        }
+
+        .side-label {
+            margin: 20px 17px 9px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 850;
+            color: #9693ac;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin: 4px 10px;
+            padding: 12px;
+            color: #4b4a67;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 650;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.current {
+            color: #6547ee;
+            background: linear-gradient(100deg, #f0ecff, #fff0fa);
+            transform: translateX(2px);
+        }
+
+        .side-icon {
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #f5f3ff;
+            font-size: 18px;
+        }
+
+        .sidebar-promo {
+            margin: 17px 12px;
+            padding: 17px;
+            border-radius: 16px;
+            background: linear-gradient(145deg, #fff0f8, #f1edff);
+            border: 1px solid #f0e4ff;
+        }
+
+        .sidebar-promo h6 {
+            color: #7137a2;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+
+        .sidebar-promo p {
+            font-size: 12px;
+            color: #78708c;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 4px 20px;
+        }
+
+        /* HERO */
+        .category-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 28px 30px;
+            margin-bottom: 22px;
+            border-radius: 24px;
+            color: white;
+            background: linear-gradient(115deg, #5141c9, #8c4fdf 52%, #e65eac);
+            box-shadow: 0 12px 30px #7954d529;
+        }
+
+        .category-hero::after {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            right: -55px;
+            top: -90px;
+            border-radius: 50%;
+            background: #ffffff19;
+            box-shadow: -65px 135px 0 -35px #ffffff12;
+            pointer-events: none;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 30px;
+            background: #ffffff25;
+            border: 1px solid #ffffff38;
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: .6px;
+        }
+
+        .category-hero h1 {
+            margin: 15px 0 9px;
+            font-size: clamp(27px, 3vw, 40px);
+            font-weight: 900;
+            letter-spacing: -1px;
+            overflow-wrap: anywhere;
+        }
+
+        .category-hero p {
+            max-width: 600px;
+            margin: 0;
+            color: #f4edff;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .hero-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .hero-stat {
+            padding: 9px 13px;
+            border-radius: 12px;
+            background: #ffffff20;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* SEARCH AND SORT */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 13px;
+            padding: 15px;
+            margin-bottom: 21px;
+            border-radius: 18px;
+            background: white;
+            border: 1px solid #eeecf7;
+            box-shadow: 0 5px 20px #25205207;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 180px;
+            max-width: 440px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            background: #f7f6fc;
+            border: 1px solid #eeecf7;
+        }
+
+        .search-box input {
+            width: 100%;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .sort-select {
+            max-width: 190px;
+            padding: 11px 12px;
+            border-radius: 12px;
+            border: 1px solid #e9e5f6;
+            background: white;
+            color: #484563;
+            font-size: 12px;
+            font-weight: 650;
+            outline: none;
+        }
+
+        /* SECTION TITLE */
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin: 0 2px 16px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 850;
+            letter-spacing: -.5px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            margin: 5px 0 0;
+        }
+
+        .live-count {
+            flex-shrink: 0;
+            padding: 8px 12px;
+            color: #6748eb;
+            background: #eeeaff;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* PRODUCT CARDS */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 19px;
         }
 
         .product-card {
-            border: none;
-            border-radius: 10px;
-            height: 100%;
-            transition: transform 0.2s;
+            min-width: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 19px;
+            background: white;
+            border: 1px solid #eeecf7;
+            box-shadow: 0 5px 18px #28204d08;
+            transition: transform .22s, box-shadow .22s;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 15px #00000018;
+            transform: translateY(-5px);
+            box-shadow: 0 13px 28px #5141c91a;
+        }
+
+        .product-visual {
+            position: relative;
+            display: grid;
+            place-items: center;
+            height: 190px;
+            padding: 16px;
+            background: linear-gradient(145deg, #f8f6ff, #fff1f8);
         }
 
         .product-image {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: contain;
+            transition: transform .25s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .image-placeholder {
+            font-size: 42px;
+            opacity: .65;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 9px;
+            border-radius: 8px;
+            background: #ffdfef;
+            color: #c12779;
+            font-size: 10px;
+            font-weight: 850;
+        }
+
+        .product-info {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
             padding: 15px;
-            background: white;
+        }
+
+        .product-name {
+            min-height: 40px;
+            margin: 0 0 7px;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
+        }
+
+        .product-description {
+            color: #89889e;
+            font-size: 11px;
+            line-height: 1.6;
+            margin-bottom: 13px;
+        }
+
+        .price-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 7px;
+            margin-top: auto;
+            margin-bottom: 12px;
         }
 
         .price {
+            color: #25204c;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 900;
         }
 
         .old-price {
-            color: #777;
+            color: #aaa7bb;
             text-decoration: line-through;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .discount {
-            color: #198754;
-            font-size: 14px;
+            display: block;
+            width: fit-content;
+            margin-top: 4px;
+            color: #11835d;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .stock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 9px;
+            background: #e7f8ef;
+            color: #168451;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .stock-badge.out {
+            background: #fff0f1;
+            color: #c33c54;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            padding: 45px 20px;
+            text-align: center;
+            background: white;
+            border: 1px solid #eeecf7;
+            border-radius: 20px;
+        }
+
+        .no-results .empty-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .no-results h3 {
+            font-weight: 850;
+            font-size: 20px;
+        }
+
+        .no-results p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .bottom-note {
+            margin-top: 23px;
+            padding: 16px;
+            text-align: center;
+            color: #77738f;
+            font-size: 12px;
+        }
+
+        .bottom-note strong {
+            color: #7250e9;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .shop-layout {
+                grid-template-columns: 210px minmax(0, 1fr);
+                gap: 14px;
+                padding: 14px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 13px;
+            }
+
+            .product-visual {
+                height: 165px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .topbar {
+                min-height: 60px;
+            }
+
+            .brand {
+                font-size: 20px;
+            }
+
+            .nav-pill {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .shop-layout {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: 170px minmax(0, 1fr);
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .shop-layout.no-sidebar {
+                grid-template-rows: minmax(0, 1fr);
+            }
+
+            .sidebar {
+                height: 100%;
+            }
+
+            .main-content {
+                height: 100%;
+                padding: 0 0 15px;
+            }
+
+            .category-hero {
+                padding: 22px 20px;
+                border-radius: 19px;
+            }
+
+            .category-hero h1 {
+                font-size: 28px;
+            }
+
+            .toolbar {
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .sort-select {
+                max-width: none;
+                width: 100%;
+            }
+
+            .section-heading h2 {
+                font-size: 19px;
+            }
+
+            .product-visual {
+                height: 145px;
+                padding: 12px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .price {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .product-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .product-visual {
+                height: 190px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark px-4 py-3">
-    <a class="navbar-brand fw-bold" href="/api/page/">FiltrCart</a>
+<nav class="topbar navbar navbar-dark px-3 px-md-4">
+    <div class="container-fluid p-0 d-flex align-items-center justify-content-between gap-2">
+        <a class="brand" href="/api/page/">
+            🛍️ Pro<span>Shop</span>
+        </a>
 
-    <a class="text-white text-decoration-none" href="/api/page/">
-        All Categories
-    </a>
+        <div class="d-flex align-items-center gap-1 gap-md-3">
+            <a class="nav-pill" href="/api/page/">Home</a>
+            <a class="nav-pill d-none d-sm-inline-block" href="/api/page/">
+                Categories
+            </a>
+            <a class="back-link" href="/api/page/">
+                ← <span class="d-none d-sm-inline">All Categories</span>
+                <span class="d-sm-none">Back</span>
+            </a>
+        </div>
+    </div>
 </nav>
 
-<div class="container py-4">
+<div class="shop-layout {% if not show_sidebar %}no-sidebar{% endif %}">
 
-    <div class="bg-white rounded p-4 mb-4">
-        <h2>{{ category.name }}</h2>
-        <p class="text-secondary mb-0">
-            {{ category.description }}
-        </p>
-    </div>
+    {% if show_sidebar %}
+    <aside class="sidebar">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Products</h4>
-        <span class="text-secondary">
-            {{ products|length }} products
-        </span>
-    </div>
+        <div class="sidebar-banner">
+            <div class="eyebrow">YOUR SHOPPING SPACE</div>
+            <h5>Explore Store ✨</h5>
+            <p>Find your favorites and discover something new.</p>
+        </div>
 
-    <div class="row g-4">
+        <div class="side-label">SHOP BY CATEGORY</div>
+        <label>{{defaule_category}}</label>
+        {% for item in categories %}
+        <a href="{% url 'category_detail' item.id %}?source=categories"
+           class="sidebar-link {% if item.id == category.id %}current{% endif %}">
 
-        {% for product in products %}
-        <div class="col-6 col-md-4 col-lg-3">
+            <span class="side-icon">
+                {% if item.name|lower == "Mobiles" %}
+                    📱
+                {% elif item.name|lower == "electronics" or item.name|lower == "electonic" %}
+                    💻
+                {% elif item.name|lower == "fashion" %}
+                    👕
+                {% elif item.name|lower == "for you" %}
+                    ✨
+                {% elif item.name|lower == "home" or item.name|lower == "home & furniture" %}
+                    🛋️
+                {% elif item.name|lower == "books" %}
+                    📚
+                {% elif item.name|lower == "grocery" %}
+                    🛒
+                {% else %}
+                    🏷️
+                {% endif %}
+            </span>
 
-            <div class="card product-card">
+            <span>{{ item.name }}</span>
+        </a>
+        {% empty %}
+        <p class="small text-secondary px-3">No categories available.</p>
+        {% endfor %}
 
-                {% if product.image_url %}
+        <div class="sidebar-promo">
+            <div style="font-size: 27px;">💜</div>
+            <h6>Happy Shopping!</h6>
+            <p>Great finds, lovely prices, and a better shopping experience.</p>
+        </div>
+
+    </aside>
+    {% endif %}
+
+    <main class="main-content">
+
+        <section class="category-hero">
+            <span class="hero-label">✦ YOUR NEXT FAVORITE FIND</span>
+
+            <h1>{{ category.name }}</h1>
+
+            <p>
+                {% if category.description %}
+                    {{ category.description }}
+                {% else %}
+                    Explore our handpicked collection and find products you'll love.
+                {% endif %}
+            </p>
+
+            <div class="hero-bottom">
+                <span class="hero-stat">
+                    🛍️ <span id="heroProductCount">{{ products|length }}</span> products
+                </span>
+                <span class="hero-stat">💜 A little joy in every discovery</span>
+            </div>
+        </section>
+
+        <section class="toolbar">
+            <label class="search-box">
+                <span aria-hidden="true">🔎</span>
+                <input type="search"
+                       id="productSearch"
+                       placeholder="Search products in {{ category.name }}..."
+                       aria-label="Search products">
+            </label>
+
+            <select id="sortProducts" class="sort-select"
+                    aria-label="Sort products">
+                <option value="default">Sort: Recommended</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+            </select>
+        </section>
+
+        <div class="section-heading">
+            <div>
+                <h2>Discover Products <span>✨</span></h2>
+                <p>Something special might be waiting for you.</p>
+            </div>
+
+            <span class="live-count">
+                <span id="visibleCount">{{ products|length }}</span> items
+            </span>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+
+            {% for product in products %}
+            <article class="product-card"
+                     data-name="{{ product.name|lower }}"
+                     data-price="{% if product.discount_price and product.discount_price < product.price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}">
+
+                <div class="product-visual">
+
+                    {% if product.discount_price and product.discount_price < product.price %}
+                    <span class="sale-badge">
+                        {{ product.discount_percentage }}% OFF
+                    </span>
+                    {% endif %}
+
+                    {% if product.image_url %}
                     <img src="{{ product.image_url }}"
                          class="product-image"
-                         alt="{{ product.name }}">
-                {% else %}
-                    <div class="product-image d-flex align-items-center justify-content-center text-secondary">
-                        No image available
+                         alt="{{ product.name }}"
+                         loading="lazy">
+                    {% else %}
+                    <div class="image-placeholder" aria-label="No image available">
+                        🛍️
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                <div class="card-body">
+                </div>
 
-                    <h6 class="card-title">
-                        {{ product.name }}
-                    </h6>
+                <div class="product-info">
+                    <h3 class="product-name">{{ product.name }}</h3>
 
-                    <p class="text-secondary small">
+                    <p class="product-description">
                         {{ product.description|truncatewords:12 }}
                     </p>
 
-                    <div class="mb-2">
+                    <div class="price-row">
                         {% if product.discount_price and product.discount_price < product.price %}
-                            <span class="price">
-                                ₹{{ product.discount_price }}
+                            <span class="price">₹{{ product.discount_price }}</span>
+                            <span class="old-price">₹{{ product.price }}</span>
+                            <span class="discount">
+                                Save {{ product.discount_percentage }}%
                             </span>
-
-                            <span class="old-price ms-1">
-                                ₹{{ product.price }}
-                            </span>
-
-                            <div class="discount">
-                                {{ product.discount_percentage }}% off
-                            </div>
                         {% else %}
-                            <span class="price">
-                                ₹{{ product.price }}
-                            </span>
+                            <span class="price">₹{{ product.price }}</span>
                         {% endif %}
                     </div>
 
                     {% if product.stock > 0 %}
-                        <span class="badge bg-success">In Stock</span>
+                    <span class="stock-badge">● In Stock</span>
                     {% else %}
-                        <span class="badge bg-danger">Out of Stock</span>
+                    <span class="stock-badge out">● Out of Stock</span>
                     {% endif %}
-
                 </div>
+
+            </article>
+            {% empty %}
+            <div class="no-results" id="emptyProducts">
+                <div class="empty-icon">🛍️</div>
+                <h3>Something exciting is coming!</h3>
+                <p>There are no products in this category yet.</p>
+            </div>
+            {% endfor %}
+
+            <div class="no-results" id="noSearchResults" style="display:none;">
+                <div class="empty-icon">🔎</div>
+                <h3>No matching products</h3>
+                <p>Try another product name or clear your search.</p>
             </div>
 
         </div>
 
-        {% empty %}
-        <div class="col-12">
-            <div class="bg-white rounded p-5 text-center">
-                <h5>No products in this category</h5>
-                <p class="text-secondary">
-                    Add products to this category from Django Admin.
-                </p>
-            </div>
+        <div class="bottom-note">
+            Made with 💜 for your shopping journey at <strong>FiltrCart</strong>
         </div>
-        {% endfor %}
 
-    </div>
-
-    <div class="text-center mt-4">
-        <a href="/api/page/" class="btn btn-primary">
-            Back to Categories
-        </a>
-    </div>
-
+    </main>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("productSearch");
+    const sortSelect = document.getElementById("sortProducts");
+    const grid = document.getElementById("productGrid");
+    const visibleCount = document.getElementById("visibleCount");
+    const heroCount = document.getElementById("heroProductCount");
+    const noResults = document.getElementById("noSearchResults");
+    const sidebar = document.querySelector(".sidebar");
+
+    // Restore sidebar scroll after changing category
+    if (sidebar) {
+        const savedScroll = sessionStorage.getItem("categorySidebarScroll");
+
+        if (savedScroll !== null) {
+            sidebar.scrollTop = Number(savedScroll);
+        }
+
+        // Save position before navigating to another category
+        sidebar.querySelectorAll(".sidebar-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                sessionStorage.setItem(
+                    "categorySidebarScroll",
+                    sidebar.scrollTop
+                );
+            });
+        });
+    }
+
+    if (!searchInput || !sortSelect || !grid) return;
+
+    function updateProducts() {
+        const query = searchInput.value.trim().toLowerCase();
+        const cards = Array.from(grid.querySelectorAll(".product-card"));
+
+        cards.forEach(function (card) {
+            const name = card.dataset.name || "";
+            const description =
+                card.querySelector(".product-description")
+                    ?.textContent.toLowerCase() || "";
+
+            card.style.display =
+                name.includes(query) || description.includes(query)
+                    ? ""
+                    : "none";
+        });
+
+        const mode = sortSelect.value;
+
+        if (mode !== "default") {
+            cards.sort(function (a, b) {
+                if (mode === "price-low") {
+                    return Number(a.dataset.price) - Number(b.dataset.price);
+                }
+
+                if (mode === "price-high") {
+                    return Number(b.dataset.price) - Number(a.dataset.price);
+                }
+
+                if (mode === "name") {
+                    return (a.dataset.name || "").localeCompare(
+                        b.dataset.name || ""
+                    );
+                }
+
+                return 0;
+            });
+
+            cards.forEach(function (card) {
+                grid.appendChild(card);
+            });
+        }
+
+        const shown = cards.filter(function (card) {
+            return card.style.display !== "none";
+        }).length;
+
+        visibleCount.textContent = shown;
+        heroCount.textContent = cards.length;
+
+        if (noResults) {
+            noResults.style.display =
+                cards.length > 0 && shown === 0 ? "block" : "none";
+        }
+    }
+
+    searchInput.addEventListener("input", updateProducts);
+    sortSelect.addEventListener("change", updateProducts);
+});
+</script>
+
 
 </body>
 </html>

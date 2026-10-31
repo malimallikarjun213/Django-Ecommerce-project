@@ -12,19 +12,13 @@ from products.models import Product
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-
-def category_page(request):
-    categories = Category.objects.filter(is_active=True)
-
-    return render(
-        request,
-        'categories/category_list.html',
-        {'categories': categories}
-    )
-
-
+    
 def category_detail(request, category_id):
+    categories = Category.objects.filter(is_active=True)
+     # Select the existing "For You" category by default
+    default_category = categories.filter(
+        name__iexact="For You"
+    ).first()
     category = get_object_or_404(
         Category,
         id=category_id,
@@ -36,14 +30,21 @@ def category_detail(request, category_id):
         is_active=True
     ).select_related('category')
 
+    # Show sidebar only when the user comes from the Categories page
+    show_sidebar = request.GET.get('source') == 'categories'
+
     return render(
         request,
         'categories/category_detail.html',
         {
             'category': category,
             'products': products,
+            'show_sidebar': show_sidebar,
+            'categories': categories,
+            'default_category': default_category,
         }
     )
+
 def add_to_cart(request, id):
     product = get_object_or_404(
         Product,

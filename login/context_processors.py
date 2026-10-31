@@ -1,5 +1,6 @@
 
-
+from django.shortcuts import render
+from categories.models import Category
 def cart_count(request):
     cart = request.session.get("cart", {})
 

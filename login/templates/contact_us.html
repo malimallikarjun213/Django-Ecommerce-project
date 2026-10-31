@@ -1,0 +1,223 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | ProShop</title>
+    <link rel="stylesheet" href="{% static 'css/contact_us.css' %}">
+
+</head>
+<body>
+
+<header class="topbar">
+       <span class="brand">🛒 ProShop</span>
+    <nav>
+        <a href="{% url 'HomePage' %}">Home</a>
+        <a href="/products/">Shop</a>
+        <a href="#contact-form" class="nav-active">Contact Us</a>
+    </nav>
+    <a href="#contact-form" class="nav-button">Get Help</a>
+</header>
+
+       {% if messages %}
+            {% for message in messages %}
+            <div class="success-alert" role="alert">
+                <span class="alert-icon">✓</span>
+                <span>{{ message }}</span>
+                <button type="button"
+                        class="alert-close"
+                        aria-label="Close alert"
+                        onclick="this.parentElement.remove()">
+                    &times;
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+    
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">💜 WE'RE HERE FOR YOU</span>
+        <h1>How can we <span>help you?</span></h1>
+        <p>
+            Questions about your orders, payments, or returns?
+            Our friendly support team is ready to help you.
+        </p>
+        <a href="#contact-form" class="primary-button">Contact Our Team ↗</a>
+        <div class="trust-line">
+            <span>✓ Friendly Support</span>
+            <span>✓ Customer First</span>
+        </div>
+    </div>
+
+    <div class="hero-art">
+        <div class="art-circle"></div>
+        <div class="support-card">
+            <div class="support-icon">🎧</div>
+            <h3>We're listening!</h3>
+            <p>Your satisfaction is our priority.</p>
+            <div class="support-status">
+                <span class="status-dot"></span> Here to help
+            </div>
+        </div>
+        <div class="floating-icon float-one">💌</div>
+        <div class="floating-icon float-two">✨</div>
+        <div class="floating-icon float-three">💬</div>
+    </div>
+</section>
+
+<main class="page-content">
+
+    
+
+    <section class="contact-section" id="contact-form">
+        <div class="contact-info">
+            <span class="eyebrow">LET'S TALK</span>
+            <h2>We'd love to hear from you.</h2>
+            <p>
+                Send us your question, feedback, or concern.
+                Tell us how we can make your ProShop experience better.
+            </p>
+
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div>
+                    <h4>Email Us</h4>
+                    <p>support@proshop.com</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div>
+                    <h4>Call Us</h4>
+                    <p>+91 98765 43210</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">🕒</div>
+                <div>
+                    <h4>Support Hours</h4>
+                    <p>Monday – Saturday, 9 AM – 6 PM</p>
+                </div>
+            </div>
+
+            <div class="info-note">
+                💜 Your feedback helps us serve you better.
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h2>Send us a message</h2>
+            <p class="form-subtitle">Fill in the details below and we'll be happy to help.</p>
+
+         
+            <form method="POST" action="{% url 'contact_us' %}">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name"
+                               placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">What can we help with?</label>
+                    <select id="subject" name="subject" required>
+                        <option value="" disabled selected>Select a topic</option>
+                        <option value="Order Issue">Order Issue</option>
+                        <option value="Delivery">Delivery Problem</option>
+                        <option value="Return">Return or Refund</option>
+                        <option value="Payment">Payment Issue</option>
+                        <option value="Account">Account Support</option>
+                        <option value="Product">Product Question</option>
+                        <option value="Feedback">Feedback or Suggestion</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="order_id">Order ID (Optional)</label>
+                    <input type="text" id="order_id" name="order_id"
+                           placeholder="e.g. ORD-12345">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="5"
+                              placeholder="Tell us how we can help you..."
+                              required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    Send Message <span>↗</span>
+                </button>
+
+                <p class="privacy-note">
+                    🔒 Your information will be handled responsibly.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <section class="bottom-banner">
+        <div class="banner-emoji">💜</div>
+        <div>
+            <h2>Your happiness matters to us.</h2>
+            <p>Thank you for being a part of the ProShop family!</p>
+             <p>Making every shopping experience better. © 2026 ProShop.</p>
+        </div>
+        <a href="/" class="banner-button">Continue Shopping →</a>
+        
+    </section>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".success-alert").forEach(function (alert) {
+
+        // Automatically hide the alert after 3.5 seconds
+        const timer = setTimeout(function () {
+            closeAlert(alert);
+        }, 3500);
+
+        // Close alert with animation
+        function closeAlert(element) {
+            if (!element || !element.isConnected) return;
+
+            clearTimeout(timer);
+            element.classList.add("hide-alert");
+
+            setTimeout(function () {
+                element.remove();
+            }, 300);
+        }
+
+        // Manual close button
+        const closeButton = alert.querySelector(".alert-close");
+
+        if (closeButton) {
+            closeButton.addEventListener("click", function () {
+                closeAlert(alert);
+            });
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>

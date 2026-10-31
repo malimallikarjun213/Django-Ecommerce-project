@@ -44,4 +44,9 @@ urlpatterns = [
     ),
 
     path('cart/', views.cart_view, name='cart'),
+    path(
+            'category/',
+            views.category_detail,
+            name='category_detail'
+        ),
 ]

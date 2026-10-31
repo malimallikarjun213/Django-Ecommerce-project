@@ -42,7 +42,7 @@
         <ul class="nav-links">
             <li><a href="{% url 'HomePage' %}">{% trans "Home" %}</a></li>
             <li><a href="#">{% trans "Shop" %}</a></li>
-            <li><a href="#">{% trans "Categories" %}</a></li>
+            <li><a href="{% url 'category_detail' 'Mobiles' %}?source=categories">{% trans "Categories" %}</a></li>
             <li><a href="#">{% trans "Deals" %}</a></li>
             <li><a href="#">{% trans "AI Suggestions" %}</a></li>
         </ul>
@@ -71,6 +71,7 @@
                <span class="cart-icon">🛒</span>
                <span class="cart-count" id="cartCount">
                  {{ cart_items_count|default:0 }}
+                 {{ show_sidebar }}
                </span>
              </a>
 
@@ -90,8 +91,8 @@
                     <a href="#"><i class="fa-solid fa-heart"></i> Favorites</a>
                     <a href="{% url 'setting' %}"><i class="fa-solid fa-gear"></i> Settings</a>
                     <a href="{% url 'saved_address' %}"><i class="fa-solid fa-map-marker-alt"></i>Location</a>
-                    <a href="#"><i class="fa-solid fa-headset"></i> Customer Care</a>
-                    <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    <a href="{% url 'contact_us' %}"><i class="fa-solid fa-headset"></i> Customer Care</a>
+                    <a href="{% url 'login' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 
                 </div>
 
@@ -117,7 +118,7 @@
                   <span>Home</span>
             </a>
 
-            <a href="{% url 'category_detail' 'Mobiles' %}" class="nav-link">
+            <a href="{% url 'category_detail' 'Mobiles' %}?source=home" class="nav-link">
                 <i class="fa-solid fa-mobile-screen-button"></i>
                 <span>Mobile</span>
             </a>

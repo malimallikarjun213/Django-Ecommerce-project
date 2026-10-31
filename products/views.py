@@ -245,3 +245,24 @@ def remove_from_cart(request, id):
     request.session.modified = True
 
     return redirect("cart")
+
+
+def category_detail(request):
+    categories = Category.objects.filter(is_active=True)
+     # Select the existing "For You" category by default
+    default_category = categories.filter(
+        name="Mobiles"
+    ).first()
+
+    # Show sidebar only when the user comes from the Categories page
+    show_sidebar = request.GET.get('source') == 'categories'
+
+    return render(
+        request,
+        'categories/category_detail.html',
+        {
+            'show_sidebar': show_sidebar,
+            'categories': categories,
+            'default_category': default_category,
+        }
+    )

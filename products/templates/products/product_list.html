@@ -50,9 +50,9 @@
         <a class="navbar-brand fw-bold" href="/products/">
             FiltrCart
         </a>
-
+              
         <div class="d-flex gap-2">
-            <a class="btn btn-light" href="/api/page/">
+            <a class="btn btn-light" href="{% url 'category_detail'  %}?source=categories">
                 Categories
             </a>
             <a class="btn btn-warning" href="{% url 'cart' %}">

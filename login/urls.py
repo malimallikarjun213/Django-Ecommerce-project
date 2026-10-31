@@ -20,5 +20,6 @@ urlpatterns = [
             category_detail,
             name='category_detail'
         ),
-    path('notification/',views.notification,name="notification")
+    path('notification/',views.notification,name="notification"),
+    path("contact_us/", views.contact_us, name="contact_us"),
 ]
